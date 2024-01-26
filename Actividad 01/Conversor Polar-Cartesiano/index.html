@@ -10,20 +10,26 @@
     <h1>Convertidor de Unidades</h1>
     <section class="seccion" id="select">
         <h2>Seleccione el tipo de conversión</h2>
-        <button id="toCart">Polares a Cartesianas</button>
-        <button id="toPolar">Cartesianas a Polares</button>
+        <div>
+            <button id="toCart">Polares a Cartesianas</button>
+            <button id="toPolar">Cartesianas a Polares</button>
+        </div>
     </section>
     <section class="seccion off" id="convert">
         <h2>Inserte el n&uacute;mero en coordenadas <span id="option"></span></h2>
         <div>
-            <p id="coord1"></p>
-            <input type="number" id="imputX">
-            <p id="coord2"></p>
-            <input type="number" id="imputY">
+            <label><p id="coord1"></p><input type="number" id="imputX"></label>
+            <label><p id="coord2"></p><input type="number" id="imputY"></label>
             <button id="btn_convert">Convertir</button>
             <p class="rta off">La conversi&oacute;n de <span id="req"></span> en coordenadas <span id="option_rt"></span> es <span id="res"></span></p>
+            <button id="btn_back" class="off">Volver</button>
         </div>
-        <button id="btn_back">Volver</button>
+    </section>
+    <section class="info">
+        <p>Hecho por: Sergio Palacios</p>
+        <p>Clase de Introducción a la Computaci&oacute;n Gr&aacute;fica</p>
+        <p>Universidad Militar Nueva Granada</p>
+        <p>2024</p>
     </section>
     <script src="./script.js"></script>
 </body>

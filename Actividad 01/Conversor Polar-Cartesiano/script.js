@@ -38,7 +38,7 @@ function convertCart(r,a){
 //Selecvionar Conversión
 $btn_toCart.addEventListener("click",()=>{
     select = "cartesianas";
-    $span_option.innerHTML = select;
+    $span_option.innerHTML = "polares";
     $p_coord1.innerHTML = "<i>r</i>";
     $p_coord2.innerHTML = "&#952;";
     $section_sel.classList.add("off");
@@ -47,7 +47,7 @@ $btn_toCart.addEventListener("click",()=>{
 
 $btn_toPolar.addEventListener("click",()=>{
     select = "polares";
-    $span_option.innerHTML = select;
+    $span_option.innerHTML = "cartesianas";
     $p_coord1.innerHTML = "<i>x</i>";
     $p_coord2.innerHTML = "<i>y</i>";
     $section_sel.classList.add("off");
@@ -58,6 +58,7 @@ $btn_toPolar.addEventListener("click",()=>{
 $btn_volver.addEventListener("click",()=>{
     select = null;
     $section_conv.classList.add("off");
+    $btn_volver.classList.add("off");
     $section_sel.classList.remove("off");
     $p_rta.classList.add("off");
 });
@@ -97,6 +98,6 @@ $btn_convert.addEventListener("click",()=>{
     }
     
     htmlInsert(rta);
-    console.log(rta);
     $p_rta.classList.remove("off");
+    $btn_volver.classList.remove("off");
 });

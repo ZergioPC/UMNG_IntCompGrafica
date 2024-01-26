@@ -1,3 +1,97 @@
 .off{
     display: none;
 }
+
+body{
+    background-color: rgb(253, 240, 209);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+h1{
+    font-size: 3em;
+    text-align: center;
+    color: #643843;
+}
+
+h2{
+    color: #85586F;
+    text-align: center;
+}
+
+label{
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+label p{
+    width: 30px;
+    margin: 0;
+    font-size: 2em;
+    color: #643843;
+}
+
+label input{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    text-align: right;
+}
+
+#select button{
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 5px 5px ;
+    border: solid 2px #643843;
+    border-radius: 15px;
+    height: 70px;
+    width: 200px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #643843;
+}
+#select button:hover{
+    background-color: #AC7D88;
+    color: white;
+    box-shadow: 5px 5px #643843;
+}
+
+.seccion{
+    margin: 0 auto;
+    width: 80vw;
+}
+
+.seccion div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rta{
+    font-size: 1.3em;
+    text-align: center;
+    text-wrap: pretty;
+    color: #643843;
+}
+
+.rta span{
+    font-weight: bold;
+}
+
+#btn_back, #btn_convert{
+    margin-top: 10px;
+    color: #643843;
+    font-weight: bold;
+    background-color: white;
+    border: solid 1.5px #643843;
+    border-radius: 8px;
+}
+
+#btn_back:hover, #btn_convert:hover{
+    transform: scale(1.2);
+}
+
+.info{
+    position: absolute;
+    bottom: 0px;
+}
