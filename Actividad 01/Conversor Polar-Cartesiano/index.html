@@ -10,13 +10,21 @@
     <h1>Convertidor de Unidades</h1>
     <section class="seccion" id="select">
         <h2>Seleccione el tipo de conversión</h2>
-        <button>Polares a Cartesianas</button>
-        <button>Cartesianas a Polares</button>
+        <button id="toCart">Polares a Cartesianas</button>
+        <button id="toPolar">Cartesianas a Polares</button>
     </section>
     <section class="seccion" id="convert">
-        <h2>Inserte el n&uacute;mero en coordenadas <span class="option"></span></h2>
-        <input type="number">
-        <p>El n&uacute;mero <span id="req"></span> en coordenadas <span class="option"></span> es <span id="res"></span></p>
+        <h2>Inserte el n&uacute;mero en coordenadas <span id="option"></span></h2>
+        <div>
+            <p>X</p>
+            <input type="number" id="imputX">
+            <p>Y</p>
+            <input type="number" id="imputY">
+            <button id="btn_convert">Convertir</button>
+            <p>El n&uacute;mero <span id="req"></span> en coordenadas <span id="option_rt"></span> es <span id="res"></span></p>
+        </div>
+        <button id="btn_back">Volver</button>
     </section>
+    <script src="./script.js"></script>
 </body>
 </html>
