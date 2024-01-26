@@ -59,3 +59,8 @@ h1{
     width: 0px;
     height: 30px;
 }
+
+.info{
+    position: absolute;
+    bottom: 0px;
+}
