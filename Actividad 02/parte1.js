@@ -36,10 +36,31 @@ const rta = {
     ],
     extras:[
         {
-            titulo:"Mathematics for 3D game programming and computer graphics",
-            autor:" Lengyel, Eric",
-            apa:"Mathematics for 3D game programming and computer graphics. Eric Lengyel. 3a ed. Boston, MACengage, 2012. (biblioteca UMNG)..",
-            url:"https://catalogo.unimilitar.edu.co/cgi-bin/koha/opac-detail.pl?biblionumber=11882&query_desc=kw%2Cwrdl%3A%20Mathematics%20for%203D%20game%20programming%20and%20computer%20graphics"
+            titulo:"Curso de Programación Básica",
+            autor:" Platzi",
+            apa:"Programa desde cero, domina Javascript, entiende HTML y aprende de algoritmos. Sí, desde cero. Entenderás la lógica del código, cómo piensan las programadoras expertas y cómo programar un videojuego web de principio a fin. Aprender a programar no es fácil, pero Platzi lo hace efectivo",
+            url:"https://platzi.com/cursos/programacion-basica/"
+        },{
+            titulo:"Curso de Programación en Python",
+            autor:" Soy Dalto",
+            apa:"Curso de Python desde cero",
+            url:"https://youtu.be/nKPbfIU442g?feature=shared"
+        },{
+            titulo:"¿Cómo funciona un PC y que hace cada pieza? | Componentes del ordenador explicados",
+            autor:" Nate Gentile",
+            apa:"En este video explicamos como funciona un PC pieza por pieza",
+            url:"https://youtu.be/0zkX6nlpiSk?feature=shared"
+        },{
+            titulo:"Curso Terminal",
+            autor:" jonmircha",
+            apa:"En este curso te enseño el manejo y los comandos básicos que necesitas para trabajar con la línea de comandos de tu computadora.",
+            url:"https://youtu.be/Pi0KVD4xTbc?feature=shared"
+        },
+        {
+            titulo:"Curso de Introducción a la Terminal y Línea de Comandos",
+            autor:" Platzi",
+            apa:"La terminal y línea de comandos es una herramienta esencial para todo desarrollador de software, sin importar su área de especialización, pues se encuentra presente de forma universal. En este curso aprenderás a aprovechar el potencial de los sistemas operativos basados en UNIX siendo capaz de dominar los comandos básicos de la terminal, realizar búsquedas que agilicen tu trabajo y administrar permisos en tu equipo.",
+            url:"https://platzi.com/cursos/terminal/"
         }
     ],
     glosario:[

@@ -14,7 +14,7 @@ function insert(x,div){
         `<li>
             <h4>${e.titulo}</h4>
             <h5>by ${e.autor}</h5>
-            <p>APA:${e.apa}</p>
+            <p>${e.apa}</p>
             <a href="${e.url}">Enlace al Documento</a>
         </li>`;
     }
