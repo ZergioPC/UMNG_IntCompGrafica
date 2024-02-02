@@ -6,19 +6,17 @@ const $rta3 = document.querySelector("#rta_3");
 
 function insert(x,div){
     let frag = document.createDocumentFragment();
-    let aux = frag.appendChild(document.createElement("ul"))
 
     for(let i=0; i<x.length; i++){
         let e = x[i];
-        aux.innerHTML +=
-        `<li>
+        div.innerHTML +=
+        `<div>
             <h4>${e.titulo}</h4>
             <h5>by ${e.autor}</h5>
             <p>${e.apa}</p>
             <a href="${e.url}">Enlace al Documento</a>
-        </li>`;
+        </div>`;
     }
-    div.appendChild(frag);
 };
 
 function glosario(x,div){
@@ -30,7 +28,7 @@ function glosario(x,div){
         aux.innerHTML +=
         `<li>
             <p class="dic_bold">${e.word}:</p>
-            <p clas="dic_rta">${e.p}</p>
+            <p class="dic_rta">${e.p}</p>
         </li>`;
     }
     div.appendChild(frag);

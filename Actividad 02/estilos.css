@@ -1,10 +1,89 @@
+:root{
+    --blanco:#F3EDC8;
+    --color1: #EAD196;
+    --texto: #7D0A0A;
+    --sombras: #BF3131;
+}
+
 body{
-    background-color: #FBFADA;
-    color: #12372A;
+    background-color: var(--color1);
+    color: var(--texto);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 h1{
+    font-size: 2.5em;
+}
+
+h2{
+    font-size: 2em;
+}
+
+h1,h2{
     text-align: center;
     font-weight: bolder;
 }
 
+.actividad{
+    margin: 40px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: var(--blanco);
+    box-shadow: 2px 2px var(--sombras);
+}
+
+.actividad ol{
+    margin: 0;
+}
+
+.actividad li{
+    margin-bottom: 1em;
+}
+
+.resp{
+    margin: 0 30px;
+}
+
+.tarj{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.tarj div{
+    margin: 10px;
+    width: 300px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: var(--blanco);
+    box-shadow: 2px 2px var(--sombras);
+    text-align: justify;
+    text-wrap: pretty;
+}
+
+h4,h5,a,p{
+    margin: 10px 0;
+}
+
+#rta_3{
+    padding: 10px 20px;
+    background-color: var(--blanco);
+    text-align: justify;
+    text-wrap: pretty;
+    border-radius: 20px;
+    background-color: var(--blanco);
+    box-shadow: 2px 2px var(--sombras);
+}
+
+.dic_bold{
+    font-weight: bold;
+}
+
+.dic_rta{
+    font-style: italic;
+}
+
+.credit{
+    margin-top: 50px;
+}
