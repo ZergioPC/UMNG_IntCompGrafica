@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="./CSS/estilos.css">
+    <title>Vectorizado de Im&aacute;genes</title>
+</head>
+<body>
+    <h1>Vectorizado de Imágenes</h1>
+    
+    <section class="activ section">
+        <h2>Actividad</h2>
+        <ol>
+            <li>Convertir una im&aacute;gen en formato de <span>Mapa de Bits</span> a un formato <span>Vectorizado</span></li>
+            <li>Realizar un Manual de Instrucciones para vectorizar una im&aacute;gen</li>
+            <li>Realizar una bibliograf&iacute;a</li>
+        </ol>
+    </section>
+    
+    <section class="info section">
+        <h2>¿Qué es una imágen Vectorial?</h2>
+        <p>Las imágenes vectoriales son imágenes digitales que nunca pueden llegar a ser pixeladas, es decir, se adaptan a diferentes formatos y tamaños sin que la imagen pierda calidad<sup><a href="#ref_1">1</a></sup>.</p>
+    </section>
+    
+    <section class="manual">
+        <h2>Manual Para Vectorizar una Im&aacute;gen</h2>
+        <ol>
+            <li>
+                <p>Abrimos un navegador web e ingresamos a <a href="https://vectorizer.com/es/">vectorizer.es</a>.</p>
+            </li>
+            <li>
+                <p>Damos click en la sección <span>En Linea</span> para cargar nuestra imágen.</p>
+                <img src="./IMG/manual_01.png">
+            </li>
+            <li>
+                <p>Se abrirá una nueva ventana, en la cual nos permitirá buscar y seleccionar la imágen que queremos vectorizar.</p>
+                <img src="./IMG/manual_02.png">
+            </li>
+            <li>
+                <p>Una vez finalizado el proceso, damos click sobre el botón de <span>Descargar,</span> obteniendo un archivo en formato <span>SVG</span><sup>><a href="#ref_2">2</a></sup>.</p>
+                <img src="./IMG/manual_03.png">
+            </li>
+            <li>
+                <p>Y listo, Disfrute su imágen vectorizada!!</p>
+            </li>
+        </ol>
+    </section>
+
+    <section class="comp">
+        <h2>Comparación de Imágenes</h2>
+        <div class="flex">
+            <div>
+                <h3>Mapa de Bits</h3>
+                <img src="./IMG/img_bits.png">
+            </div>
+            <div>
+                <h3>Vectorizada</h3>
+                <img src="./IMG/img_vector.svg">
+            </div>
+        </div>
+    </section>
+
+    <section class="reff section">
+        <h2>Bibliografía</h2>
+        <ul>
+            <li id="ref_1">Qué son las imágenes vectoriales y para que sirven <a href="https://www.clickprinting.es/blog/que-son-las-imagenes-vectorizadas-que-sirven#:~:text=Qu%C3%A9%20son%20las%20im%C3%A1genes%20vectoriales,que%20la%20imagen%20pierda%20calidad.">www.clickprinting.es</a></li>
+            <li id="reff_2">Gráficos vectoriales escalables<a href="https://es.wikipedia.org/wiki/Gr%C3%A1ficos_vectoriales_escalables">www.wikipedia.org</a></li>
+        </ul>
+    </section>
+    <button id="vector">vector</button>
+    <section class="creditos">
+        <p>Hecho por: Sergio Palacios</p>
+        <p>Clase de Introducción a la Computación Gráfica</p>
+        <p>Universidad Militar Nueva Granada</p>
+        <p>2024</p>
+    </section>
+    <script src="./JS/script.js"></script>
+</body>
+</html>

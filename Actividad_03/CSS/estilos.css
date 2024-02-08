@@ -1,0 +1,113 @@
+:root{
+    --color-1:#164863;
+    --color-2:#427D9D;
+    --color-3:#9BBEC8;
+    --color-4:#DDF2FD;
+}
+
+body{
+    background: rgb(155,190,200);
+    background: linear-gradient(180deg, rgba(155,190,200,1) 0%, rgba(221,242,253,1) 100%);
+    font-family: "Kanit", sans-serif;
+}
+
+h1{
+    font-size: 3em;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 2px var(--color-1);
+}
+
+h2{
+    margin: 10px 0;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    text-shadow: 2px 2px var(--color-1);
+}
+
+.section{
+    background-color: #ffffff44;
+    border-radius: 15px;
+    box-shadow: 4px 4px var(--color-1);
+}
+
+/*Actividad*/
+
+.activ{
+    margin: 0 130px 30px 130px;
+    padding: 7px 10px;
+}
+
+/*Info*/
+
+.info{
+    margin: 20px 70px;
+    padding: 10px 50px;
+}
+
+/*Manual*/
+
+.manual{
+    margin: 20px 20px;
+    padding: 10px 50px;
+}
+
+.manual h2{
+    font-size: 3em;
+}
+
+.manual p{
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.manual img{
+    width: 70vw;
+}
+
+/*Comp*/
+
+.comp h3{
+    text-align: center;
+}
+
+.comp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+}
+
+.flex img{
+    width: 40vw;
+    margin: 0 10px;
+    border-radius: 15px;
+}
+
+/*reff*/
+
+.reff{
+    margin: 0 20px;
+    padding: 10px 30px;
+}
+
+/*vector*/
+.vector{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 99vw;
+}
+
+#vector{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+}
