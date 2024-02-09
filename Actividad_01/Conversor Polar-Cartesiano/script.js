@@ -30,8 +30,8 @@ function convertPolar(x,y){
 };
 
 function convertCart(r,a){
-    let x = r*Math.cos(a);
-    let y = r*Math.sin(a);
+    let x = r*Math.cos(a*Math.PI/180);
+    let y = r*Math.sin(a*Math.PI/180);
     return[x.toFixed(2),y.toFixed(2)];
 }
 
