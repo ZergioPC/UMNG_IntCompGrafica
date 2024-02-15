@@ -2,17 +2,18 @@ import math;
 
 #Clase encargada de graficar
 class graficar:
-    def __init__(self):
-        self.screen = [[False]*10 for _ in range(10)];
-    
+    #Constructor
+    def __init__(self,a,b):
+        self.screen = [[False]*11 for _ in range(10)];
+        self.a = a;
+        self.b = b;
+
+    #Metodos
     def parabola(self):
         x = 0;
         y = 0;
-        for i in range(10):
-            y = 9 + math.floor(-((x-5)**2)*0.4);
-            
-            print(y)
-            print(x-5)
+        for i in range(11):
+            y = 9 + math.floor(-((x-5)**2)*0.5);
 
             if(y >= 0) and (y<10):
                 self.screen[y][x] = True;    
@@ -22,7 +23,7 @@ class graficar:
     
     def lineal(self):
         x = 0;
-        for i in range(10):
+        for i in range(11):
             y = (9-x);
 
             if(y >= 0) and (y < 10):
@@ -33,7 +34,7 @@ class graficar:
     def sin(self):
         x = 0;
     
-        for i in range(10):
+        for i in range(11):
             y = 4 - math.floor(math.sin(x)*5);
 
             if(y >= 0) and (y < 10):
@@ -65,7 +66,7 @@ def retorno():
         pass;
 
 def menu():
-    graficador  = graficar();
+    graficador  = graficar(0,11);
 
     print("- - - Graficador de Funciones - - -");
     print("Seleccione la función a graficar");
