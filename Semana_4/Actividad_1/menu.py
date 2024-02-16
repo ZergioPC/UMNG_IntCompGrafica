@@ -1,58 +1,5 @@
-import math;
+import graficador as gr;
 
-#Clase encargada de graficar
-class graficar:
-    #Constructor
-    def __init__(self,a,b):
-        self.screen = [[False]*11 for _ in range(10)];
-        self.a = a;
-        self.b = b;
-
-    #Metodos
-    def parabola(self):
-        x = 0;
-        y = 0;
-        for i in range(11):
-            y = 9 + math.floor(-((x-5)**2)*0.5);
-
-            if(y >= 0) and (y<10):
-                self.screen[y][x] = True;    
-                pass
-
-            x = x+1;
-    
-    def lineal(self):
-        x = 0;
-        for i in range(11):
-            y = (9-x);
-
-            if(y >= 0) and (y < 10):
-                self.screen[y][x] = True;    
-            
-            x = x+1;
-
-    def sin(self):
-        x = 0;
-    
-        for i in range(11):
-            y = 4 - math.floor(math.sin(x)*5);
-
-            if(y >= 0) and (y < 10):
-                self.screen[y][x] = True;
-            
-            x = x+1;
-
-    def draw(self):
-        for i in self.screen:
-            arr = [];
-            for j in i:
-                if (j == True):
-                    arr.append("0");
-                else:
-                    arr.append(".")
-            print(arr)
-
-#Menú principal
 graficador = None;
 
 def retorno():
@@ -66,7 +13,7 @@ def retorno():
         pass;
 
 def menu():
-    graficador  = graficar(0,11);
+    graficador  = gr.graficar(0,11);
 
     print("- - - Graficador de Funciones - - -");
     print("Seleccione la función a graficar");
