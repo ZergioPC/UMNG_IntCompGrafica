@@ -7,7 +7,7 @@ class graficar:
         self.a = 0;
         self.b = 10;
 
-    #Metodos    
+    #Metodos internos
 
     def renderZone(self):
         x = 0;
@@ -19,20 +19,22 @@ class graficar:
             y = y+1;
             x = 0;
 
-    def lineal(self):
+    #Metodos Externos
+
+    def lineal(self,m):
         x = 0;
-        a = self.a;
+        y = 0;
+
         self.renderZone();
 
         for i in range(self.b-self.a):
-            y = a-(10-self.a);
+            y = m*(x);
             
             if (y>=0) and (y<10):
-                self.screen[y][x] = True;    
-            print(f"x:{x} - y:{y} (a:{a})");
-            
+                self.screen[math.floor(y)][x] = True;   
+                pass
+
             x = x+1;
-            a = a+1;
     
     def parabola(self):
         x = 0;
@@ -87,7 +89,7 @@ class graficar:
 
 # Pruebas
 x = graficar();
-x.a = 5;
-x.b = 12;
-x.lineal();
+x.a = 75;
+x.b = 80;
+x.lineal(4);
 x.draw();
