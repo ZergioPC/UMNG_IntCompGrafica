@@ -6,6 +6,7 @@ class graficar:
         self.screen = [[5]*11 for _ in range(10)];
         self.a = 0;
         self.b = 10;
+        self.min = None;
 
     #Metodos internos
 
@@ -19,32 +20,39 @@ class graficar:
             y = y+1;
             x = 0;
 
-    #Metodos Externos
+    #Matematicas
 
     def lineal(self,m):
-        x = 0;
+        x = self.a;
         y = 0;
+        self.min = m*(x)
 
         self.renderZone();
 
         for i in range(self.b-self.a):
-            y = m*(x);
+            y = m*(x-self.a);
             
             if (y>=0) and (y<10):
-                self.screen[math.floor(y)][x] = True;   
+                self.screen[math.floor(y)][i] = True;   
                 pass
 
             x = x+1;
     
-    def parabola(self):
-        x = 0;
+    def parabola(self,k):
+        x = self.a;
         y = 0;
-        for i in range(11):
-            y = 9 + math.floor(-((x-5)**2)*0.5);
+        self.min = k*(x**2);
+
+        self.renderZone();
+        
+        for i in range(self.b-self.a):
+            y = k*(x**2);
 
             if(y >= 0) and (y<10):
-                self.screen[y][x] = True;    
+                self.screen[math.floor(y)][i] = True;    
                 pass
+            
+            print(f"x:{x}(i:{i}) - y:{y-self.min}")
 
             x = x+1;
 
@@ -61,12 +69,14 @@ class graficar:
             
             x = x+1;
 
+    #Dibujado
+
     def draw(self):
         #Cambio de Orientación
         ord = len(self.screen)-1;
 
-        aux = 10;
-        aux2 = ["X"]*11;
+        aux = 10+self.min;
+        aux2 = ["X "]*11;
         arry =[""]*(ord+1);
 
         for i in self.screen:
@@ -78,26 +88,27 @@ class graficar:
             arr = [];
             for j in i:
                 if (j == True):
-                    arr.append("0");
+                    arr.append("0 ");
                 elif(j == False):
-                    arr.append(".");
+                    arr.append(". ");
                 else:
-                    arr.append("X")
+                    arr.append("X ")
             print(f"[{aux}]{arr}")
             print("")
             aux = aux-1;
         
-        aux = 0;
+        aux = self.a;
         for i in range(self.b-self.a):
             aux2[i]= f"{aux +1}";
             aux = aux+1;
         
-        print(f"[O]{aux2}")
+        print(f"[# ]{aux2}")
 
 
 # Pruebas
 x = graficar();
-x.a = 75;
-x.b = 80;
-x.lineal(4);
+x.a = 10;
+x.b = 18;
+#x.parabola(0.5)
+x.lineal(1);
 x.draw();
