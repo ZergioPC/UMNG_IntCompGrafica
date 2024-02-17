@@ -34,7 +34,6 @@ class graficar:
             
             if (y>=0) and (y<10):
                 self.screen[math.floor(y)][i] = True;   
-                pass
 
             x = x+1;
     
@@ -46,13 +45,12 @@ class graficar:
         self.renderZone();
         
         for i in range(self.b-self.a):
-            y = k*(x**2);
+            y = (k*(x**2))-self.min;
 
             if(y >= 0) and (y<10):
                 self.screen[math.floor(y)][i] = True;    
-                pass
             
-            print(f"x:{x}(i:{i}) - y:{y-self.min}")
+            print(f"x:{i} - y:{math.floor(y)}")
 
             x = x+1;
 
@@ -75,7 +73,7 @@ class graficar:
         #Cambio de Orientación
         ord = len(self.screen)-1;
 
-        aux = 10+self.min;
+        aux = 10+math.floor(self.min);
         aux2 = ["X "]*11;
         arry =[""]*(ord+1);
 
@@ -92,23 +90,28 @@ class graficar:
                 elif(j == False):
                     arr.append(". ");
                 else:
-                    arr.append("X ")
-            print(f"[{aux}]{arr}")
+                    arr.append("X ");
+            if(aux < 10):
+                print(f"[0{aux}]{arr}");
+            else:
+                print(f"[{aux}]{arr}");
             print("")
             aux = aux-1;
         
-        aux = self.a;
+        aux = math.floor(self.min);
         for i in range(self.b-self.a):
-            aux2[i]= f"{aux +1}";
+            if(aux < 9):
+                aux2[i]= f"0{aux +1}";
+            else:
+                aux2[i]= f"{aux +1}";
             aux = aux+1;
         
-        print(f"[# ]{aux2}")
+        print(f"[##]{aux2}")
 
 
 # Pruebas
 x = graficar();
-x.a = 10;
-x.b = 18;
-#x.parabola(0.5)
-x.lineal(1);
+x.a = 20;
+x.b = 30;
+x.parabola(0.05)
 x.draw();
