@@ -62,11 +62,19 @@ class graficar:
             x = x+1;
 
     def draw(self):
-        aux = 0;
+        #Cambio de Orientación
+        ord = len(self.screen)-1;
+
+        aux = 10;
         aux2 = ["X"]*11;
-        
-        #
+        arry =[""]*(ord+1);
+
         for i in self.screen:
+            arry[ord] = i;
+            ord = ord-1;
+        
+        #Graficado
+        for i in arry:
             arr = [];
             for j in i:
                 if (j == True):
@@ -77,7 +85,7 @@ class graficar:
                     arr.append("X")
             print(f"[{aux}]{arr}")
             print("")
-            aux = aux+1;
+            aux = aux-1;
         
         aux = 0;
         for i in range(self.b-self.a):
