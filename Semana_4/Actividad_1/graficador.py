@@ -10,6 +10,12 @@ class graficar:
 
     #Metodos internos
 
+    def setA(self,a):
+        self.a = a;
+    
+    def setB(self,b):
+        self.b = b;
+
     def renderZone(self):
         x = 0;
         y = 0;
@@ -49,22 +55,21 @@ class graficar:
 
             if(y >= 0) and (y<10):
                 self.screen[math.floor(y)][i] = True;    
-            
-            print(f"x:{i} - y:{math.floor(y)}")
 
             x = x+1;
 
-    def sin(self):
-        x = 0;
-    
-        for i in range(11):
-            y = 4 - math.floor(math.sin(x)*5);
+    def sin(self,A):
+        x = self.a;
+        self.min = math.floor(math.sin(x)*A);
+
+        self.renderZone();
+
+        for i in range(self.b - self.a):
+            y = 5 + math.floor(math.sin(x)*A);
 
             if(y >= 0) and (y < 10):
-                self.screen[y][x] = True;
-            else:
-                self.screen[y][x] = False;
-            
+                self.screen[y][i] = True;
+
             x = x+1;
 
     #Dibujado
@@ -73,7 +78,7 @@ class graficar:
         #Cambio de Orientación
         ord = len(self.screen)-1;
 
-        aux = 10+math.floor(self.min);
+        aux = 10 + math.floor(self.min);
         aux2 = ["X "]*11;
         arry =[""]*(ord+1);
 
@@ -84,6 +89,7 @@ class graficar:
         #Graficado
         for i in arry:
             arr = [];
+            
             for j in i:
                 if (j == True):
                     arr.append("0 ");
@@ -91,6 +97,7 @@ class graficar:
                     arr.append(". ");
                 else:
                     arr.append("X ");
+            
             if(aux < 10):
                 print(f"[0{aux}]{arr}");
             else:
@@ -107,11 +114,3 @@ class graficar:
             aux = aux+1;
         
         print(f"[##]{aux2}")
-
-
-# Pruebas
-x = graficar();
-x.a = 20;
-x.b = 30;
-x.parabola(0.05)
-x.draw();
