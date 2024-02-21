@@ -30,9 +30,16 @@ def rango():
     print("Indique el valor de X inicial (Solo números positivos)");
     a = math.floor(int(input("")));
     graficador.setA(a);
-    print("Indique el rango de graficación (Maximo 10)");
-    b = math.floor(int(input("")));
-    graficador.setB((b+a));
+
+    while True:
+        print("Indique el rango de graficación (Maximo 10)");
+        b = math.floor(int(input("")));
+
+        if(b<10)and(b>0):
+            break;
+        else:
+            print("Fuera de Rango\n\n");
+
     
 def retorno():
     print("Desea ver otra grafica?");
