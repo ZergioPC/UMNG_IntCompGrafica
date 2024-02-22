@@ -1,27 +1,122 @@
+/*MAIN*/
+:root{
+    --color-0: #F5EFE7;
+    --color-1: #e0d5cc;
+    --color-2: #4F709C;
+    --color-3: #213555;
+    --color-v: #d4f0d6;
+    --color-f: #ffc1c1;
+}
+
+body{
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 1.2em;
+    background-color: var(--color-0);
+    color: var(--color-3);
+}
+
 h1{
+    padding-top: 15px;
+    padding-bottom: 5px;
     text-align: center;
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 4em;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    color: var(--color-0);
+    text-shadow: #213555 2px 2px 2px;
+    background-color: var(--color-2);
 }
 
 section{
     margin: 20px;
     padding: 20px;
-    background-color: #dfdfdf;
+    background-color: var(--color-1);
     border-radius: 20px;
 }
 
 h2{
+    margin: 10px 0 0 0;
     text-align: center;
+    font-size: 2.5em;
 }
+
+h3{
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-size: 2em;
+}
+
+span{
+    font-weight: bold;
+}
+
+/*DESARROLLO*/
 
 .container{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .label{
+    position: relative;
     background: white;
-    margin: 20px;
+    margin: 40px 20px 20px 20px;
     padding: 10px;
-    width: 200px;
+    width: 400px;
     border-radius: 15px;
 }
+
+/* Container */
+h4{
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-size: 1.5em;
+}
+.label img{
+    padding: 10px;
+    position: absolute;
+    height: 60px;
+    top: -40px;
+    left: -20px;
+    background-color: var(--color-0);
+    border: solid 4px var(--color-3);
+    border-radius: 20px;
+    box-shadow: var(--color-3) 2px 2px;
+}
+
+.label .vs{
+    height: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 4fr;
+}
+.info{
+    grid-row: 1/2;
+    grid-column: 1/3;
+}
+.info p{
+    margin: 15px 20px 0 20px;
+    text-align: justify;
+}
+
+.pros{
+    margin: 0 5px;
+    padding: 10px;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    background-color: var(--color-v);
+    border-radius: 20px;
+}
+.conts{
+    margin: 0 5px;
+    padding: 10px;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    background-color: var(--color-f);
+    border-radius: 20px;
+}
+/* Container */
