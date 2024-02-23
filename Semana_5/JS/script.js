@@ -45,6 +45,12 @@ const inf =[
 const $container = document.querySelector(".container");
 const $bibl = document.querySelector("#bibCont");
 
+const $codigo = document.querySelector("#codigo");
+const $btn_pyLine = document.querySelector("#py_line");
+const $btn_pyCirc = document.querySelector("#py_circl");
+const $btn_pyDraw = document.querySelector("#py_draw");
+const $btn_pyClose = document.querySelector("#py_close");
+
 /* Insertar Elementos - Desarrollo*/
 
 for(let i=0; i<inf.length;  i++){
@@ -77,3 +83,41 @@ for(let i=0; i<inf.length; i++){
             <li><a href="${inf[i].bib}">${inf[i].tit} Documentation</a></li>
     `;
 }
+
+/* Insertar Elementos - Archivos de python */
+$btn_pyLine.addEventListener("click",()=>{
+    $codigo.innerHTML="";
+    
+    fetch('./PYTHON_CODE/linea.py')
+    .then(res => res.text())
+    .then(content => {
+    let lines = content.split(/\n/);
+    lines.forEach(line => $codigo.innerHTML+=`${line}<br>`);
+    });
+});
+
+$btn_pyCirc.addEventListener("click",()=>{
+    $codigo.innerHTML="";
+    
+    fetch('./PYTHON_CODE/circulo.py')
+    .then(res => res.text())
+    .then(content => {
+    let lines = content.split(/\n/);
+    lines.forEach(line => $codigo.innerHTML+=`${line}<br>`);
+    });
+});
+
+$btn_pyDraw.addEventListener("click",()=>{
+    $codigo.innerHTML="";
+    
+    fetch('./PYTHON_CODE/dibujo.py')
+    .then(res => res.text())
+    .then(content => {
+    let lines = content.split(/\n/);
+    lines.forEach(line => $codigo.innerHTML+=`${line}<br>`);
+    });
+});
+
+$btn_pyClose.addEventListener("click",()=>{
+    $codigo.innerHTML="Ver Codigo";
+});
