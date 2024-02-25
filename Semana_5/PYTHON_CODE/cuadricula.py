@@ -13,7 +13,7 @@ class cuadricula:
         pygame.draw.line(self.pantalla,self.color,[(self.width/2),0],[(self.width/2),self.height],3);
 
         for i in range(10):
-            pygame.draw.line(self.pantalla,self.color,[0,(i*a)],[self.width,(i*a)],1);
+            pygame.draw.line(self.pantalla,self.color,[0,(i*self.a)],[self.width,(i*self.a)],1);
             
         for i in range(14):
-            pygame.draw.line(self.pantalla,self.color,[(i*a-1),0],[(i*a-1),self.height],1);
+            pygame.draw.line(self.pantalla,self.color,[(i*self.a-1),0],[(i*self.a-1),self.height],1);

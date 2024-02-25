@@ -1,22 +1,42 @@
 import pygame
 import sys
 import cuadricula
+import math
 
 #Definicion de variables
 rojo = (150,0,0);
 negro = (0,0,0);
 arr = []
 
+width = 600;
+height = 400;
+dx = 5;
+
 #Get Coordenadas;
-print("|- - - Dibujar una Linea - - -|");
-x1 = int(input("Ingrese la Coordenada x1:  "))
-y1 = int(input("Ingrese la Coordenada y1:  "))
-x2 = int(input("Ingrese la Coordenada x2:  "))
-y2 = int(input("Ingrese la Coordenada y2:  "))
+while True:
+    print("|- - - Dibujar una Linea - - -|");
+    print("Grafique una linea en un plano cartesiano");
+    print(f"Dominio de valores en x: desde -{math.floor(width/(dx*2))} hasta {math.floor(width/(dx*2))}");
+    print(f"Dominio de valores en y: desde -{math.floor(height/(dx*2))} hasta {math.floor(height/(dx*2))}");
+
+    x1 = int(input("Ingrese la Coordenada x1:  "))        
+    y1 = int(input("Ingrese la Coordenada y1:  "))
+    x2 = int(input("Ingrese la Coordenada x2:  "))
+    y2 = int(input("Ingrese la Coordenada y2:  "))
+
+    if(x1>60 or x1<-60):
+        print(f"\nError: valor de x1({x1}) fuera de rango\n\n");
+    elif(x2>60 or x2<-60):
+        print(f"\nError: valor de x1({x2}) fuera de rango\n\n");
+    elif(y1>40 or y1<-40):
+            print(f"\nError: valor de x1({y1}) fuera de rango\n\n");
+    elif(y2>40 or y2<-40):
+            print(f"\nError: valor de x1({y2}) fuera de rango\n\n");
+    else:
+        break;
 
 #Calculos de la recta
 d = 0.0000001
-dx = 5;
 
 m =round(((y2-y1)/(x2-x1+d)),3);
 b = y1*dx-(m*x1)*dx;
@@ -33,9 +53,6 @@ for i in range(rango):
     arr.append([x,y])
 
 # PYGAME #
-width = 600;
-height = 400;
-
 windowSize = [width,height];
 
 pygame.init();
