@@ -119,5 +119,12 @@ $btn_pyDraw.addEventListener("click",()=>{
 });
 
 $btn_pyClose.addEventListener("click",()=>{
-    $codigo.innerHTML="Ver Codigo";
+    $codigo.innerHTML="";
+    
+    fetch('./PYTHON_CODE/cuadricula.py')
+    .then(res => res.text())
+    .then(content => {
+    let lines = content.split(/\n/);
+    lines.forEach(line => $codigo.innerHTML+=`${line}<br>`);
+    });
 });

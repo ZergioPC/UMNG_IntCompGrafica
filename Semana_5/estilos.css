@@ -123,6 +123,7 @@ h4{
 
 /*Codigo*/
 .code{
+    width: 80vw;
     margin-top: 20px;
     padding: 20px;
     background-color: var(--color-3);
@@ -132,3 +133,46 @@ h4{
     color: white;
 }
 /*Codigo*/
+.codigo{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.opciones{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+button{
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+}
+
+.pyBtn:hover{
+    background-color: var(--color-2);
+}
+.pyBtn{
+    margin: 0 20px;
+    width: 200px;
+    background-color: var(--color-3);
+}
+
+.pyBtn a:-webkit-any-link {
+    color: var(--color-0);
+    text-decoration: none;
+}
+
+@media screen and (max-width:1050px){
+    .opciones{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .pyBtn{
+        margin: 10px 0;
+    }
+}
