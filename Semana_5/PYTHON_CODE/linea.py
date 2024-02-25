@@ -1,66 +1,64 @@
-"""
-Created on Thu Feb 22 11:42:30 2024
-
-@author: Sergio Palacios
-"""
 import pygame
-import math
+import sys
+import cuadricula
 
-#Get Coordenadas;
-
-color = (0,0,255);
+#Definicion de variables
+rojo = (150,0,0);
+negro = (0,0,0);
 arr = []
 
+#Get Coordenadas;
 print("|- - - Dibujar una Linea - - -|");
 x1 = int(input("Ingrese la Coordenada x1:  "))
 y1 = int(input("Ingrese la Coordenada y1:  "))
 x2 = int(input("Ingrese la Coordenada x2:  "))
 y2 = int(input("Ingrese la Coordenada y2:  "))
 
-m =(y2-y1)/(x2-x1)
-rango = x2 - x1 + 1
-print(rango)
+#Calculos de la recta
+d = 0.0000001
+dx = 5;
+
+m =round(((y2-y1)/(x2-x1+d)),3);
+b = y1*dx-(m*x1)*dx;
+
+rango = abs(x2-x1);
+
 for i in range(rango):
-    x = x1+i
-    y = math.floor(m*(x1+i))
+    if(x2 > x1):
+        x = (x1+i)*dx
+    else:
+        x = (x2+i)*dx
+
+    y = (m*x)+b
     arr.append([x,y])
+
+# PYGAME #
+width = 600;
+height = 400;
+
+windowSize = [width,height];
+
+pygame.init();
+pygame.display.set_caption('Dibujar una Linea');
+
+pantalla = pygame.display.set_mode(windowSize);
+
+while True:
+    for e in pygame.event.get():
+        if(e.type == pygame.QUIT):
+            sys.exit();
     
-# pygame setup
-pygame.init()
-pygame.display.set_caption('Dibujar una Linea')
-screen = pygame.display.set_mode((600, 400))
-clock = pygame.time.Clock()
-running = True
-
-for i in range(rango):
-    print(f"x:{arr[i][0]+300} y:{arr[i][1]+200}")
-        
-while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill((140,140,140))
-
-    #Lineas del Plano
-    pygame.draw.rect(screen,"black",(298,0,4,400))
-    pygame.draw.rect(screen,"black",(0,198,600,4))
+    pantalla.fill((255,255,255));
     
-
-    # RENDER YOUR GAME HERE
-    pygame.draw.rect(screen,color,(5,5,1,1))
+    #Cuadricula
+    fondo = cuadricula.cuadricula(pantalla,negro,height,width,dx);
+    fondo.draw();
     
+    #Linea
     for i in range(rango):
-        pygame.draw.rect(screen,color,(arr[i][0]+300,arr[i][1]+200,1,1)) 
-        
-    # flip() the display to put your work on screen
-    rotar = pygame.transform.flip(screen, False, True)
-    screen.blit(rotar,(0,0))
-    pygame.display.flip()
+        pygame.draw.rect(pantalla,rojo,[(arr[i][0]+(width/2)-1),((height/2)-(arr[i][1])),2,2]);
+    
+    pygame.draw.circle(pantalla,rojo,[((x1*dx)+(width/2)),((height/2)-(y1*dx))],5);
+    pygame.draw.circle(pantalla,rojo,[((x2*dx)+(width/2)),((height/2)-(y2*dx))],5);
 
-    clock.tick(60)  # limits FPS to 60
-
-pygame.quit()
+    pygame.display.flip();
