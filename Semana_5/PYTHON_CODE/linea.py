@@ -10,7 +10,7 @@ arr = []
 
 width = 600;
 height = 400;
-dx = 5;
+dx = 5; #Distancia por la que se separarán visualmente las casillas. Considerando que el espacio entre lineas será 10
 
 #Get Coordenadas;
 while True:
@@ -27,25 +27,29 @@ while True:
     if(x1>60 or x1<-60):
         print(f"\nError: valor de x1({x1}) fuera de rango\n\n");
     elif(x2>60 or x2<-60):
-        print(f"\nError: valor de x1({x2}) fuera de rango\n\n");
+        print(f"\nError: valor de x2({x2}) fuera de rango\n\n");
     elif(y1>40 or y1<-40):
-            print(f"\nError: valor de x1({y1}) fuera de rango\n\n");
+            print(f"\nError: valor de y1({y1}) fuera de rango\n\n");
     elif(y2>40 or y2<-40):
-            print(f"\nError: valor de x1({y2}) fuera de rango\n\n");
+            print(f"\nError: valor de y2({y2}) fuera de rango\n\n");
     else:
         break;
 
 #Calculos de la recta
-d = 0.0000001
+"""
+    Los calculos se realizaran mediante la ecuación de la recta y=mx+b
+"""
 
-m =round(((y2-y1)/(x2-x1+d)),3);
+d = 0.0000001 #Diferencial para que al sacar la pendiente no de un numero indeterminado
+
+m =round(((y2-y1)/(x2-x1+d)),3); #Pendiente redondeada para eliminar el diferencial
 b = y1*dx-(m*x1)*dx;
 
 rango = abs(x2-x1);
 
-for i in range(rango):
+for i in range(rango): #En caso de que el punto (x2,y2) se encuentre detras del punto (x1,y1)
     if(x2 > x1):
-        x = (x1+i)*dx
+        x = (x1+i)*dx 
     else:
         x = (x2+i)*dx
 
@@ -75,7 +79,7 @@ while True:
     for i in range(rango):
         pygame.draw.rect(pantalla,rojo,[(arr[i][0]+(width/2)-1),((height/2)-(arr[i][1])),2,2]);
     
-    pygame.draw.circle(pantalla,rojo,[((x1*dx)+(width/2)),((height/2)-(y1*dx))],5);
-    pygame.draw.circle(pantalla,rojo,[((x2*dx)+(width/2)),((height/2)-(y2*dx))],5);
+    pygame.draw.circle(pantalla,rojo,[((x1*dx)+(width/2)),((height/2)-(y1*dx))],5); #Punto (x1,y1)
+    pygame.draw.circle(pantalla,rojo,[((x2*dx)+(width/2)),((height/2)-(y2*dx))],5); #Punto (x2,y2)
 
     pygame.display.flip();
