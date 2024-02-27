@@ -11,6 +11,7 @@ dx = 5;
 negro = (0,0,0);
 verde = (0,150,0);
 amarillo = (241,192,70);
+azul = (0,0,150);
 
 #Dibujar montaña
 climb = [];
@@ -26,8 +27,8 @@ r = 10;
 vector = [r*dx,0];
 sol = []
 a = 1; #Valor de la distancia de rotación a la que rotará el vector para dibujar el círculo
-x = 18;
-y = 21;
+xSol = 18;
+ySol = 21;
 
 for i in range(360):
     rotar = [round((vector[0]*math.cos(math.radians(a)))-(vector[1]*math.sin(math.radians(a))),3),
@@ -37,10 +38,35 @@ for i in range(360):
 
 #Desplazar el Circulo
 for i in range(360):
-    sol[i][0] = sol[i][0] + x*dx;
-    sol[i][1] = sol[i][1] - y*dx;
+    sol[i][0] = sol[i][0] + xSol*dx;
+    sol[i][1] = sol[i][1] - ySol*dx;
 
 #Dibujar Rio
+""" Mediante una transformación lineal, inclinaremos la función sin() """
+
+rio = [] #Declaramos el arreglo
+ux = [1,0]; #Vector base en dirección x
+uy = [0.7,0.5];  #Vector bas en dirección y
+
+for x in range(180): #Coordenadas de la función sin()
+    y = math.sin(math.radians(x*4))*20;
+    rio.append([x,y]);
+
+for i in range(len(rio)): #Aplicamos transformación lineal
+    rio[i] = [rio[i][0]*ux[0] + rio[i][1]*uy[0],
+            rio[i][0]*ux[1] + rio[i][1]*uy[1]]
+
+th = -20; #Angulo de inclinación
+
+for i in range(len(rio)): #Rotamos un poco la funcion en el plano mediante una matriz de rotación
+    rio[i] = [round((rio[i][0]*math.cos(math.radians(th)))-(rio[i][1]*math.sin(math.radians(th))),3),
+            round((rio[i][0]*math.sin(math.radians(th)))+(rio[i][1]*math.cos(math.radians(th))),3)];
+
+xRio = 20;  #Desplazamiento en x
+yRio = 120;  #Desplazamiento en y
+
+for i in range(len(rio)): #Desplazamos el rio
+    rio[i] = [rio[i][0] + xRio, rio[i][1] + yRio];
 
 #PyGame
 pygame.init();
@@ -60,12 +86,18 @@ while True:
     display.fill((255,255,255));
     cuadr.draw();
     
-    """ for i in range(len(climb)): #Diujar Montañas
+    for i in range(len(climb)): #Diujar Montañas
         pygame.draw.rect(display,verde,dibujar(climb,i,-110,80));
         pygame.draw.rect(display,verde,dibujar(climb,i,-50,10));
         pygame.draw.rect(display,verde,dibujar(climb,i,10,50));
 
     for i in range(len(sol)): #Dibujar Sol
-        pygame.draw.rect(display,amarillo,[sol[i][0]+(width/2),(heigth/2)+sol[i][1],2,2]) """
+        pygame.draw.rect(display,amarillo,[sol[i][0]+(width/2),(heigth/2)+sol[i][1],2,2]);
+
+    for i in range(len(rio)): #Dibujar rio
+        pygame.draw.rect(display,azul,[rio[i][0]+(width/2),(heigth/2)+rio[i][1],2,2]);
+        pygame.draw.rect(display,azul,[rio[i][0]+(width/2)+4,(heigth/2)+rio[i][1],2,2]);
+        pygame.draw.rect(display,azul,[rio[i][0]+(width/2)+8,(heigth/2)+rio[i][1],2,2]);
+        pygame.draw.rect(display,azul,[rio[i][0]+(width/2)+12,(heigth/2)+rio[i][1],2,2]);
 
     pygame.display.flip();
