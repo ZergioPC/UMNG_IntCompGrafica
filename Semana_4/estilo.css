@@ -1,0 +1,47 @@
+:root{
+    --color-0:#93B1A6;
+    --color-1:#5C8374;
+    --color-2:#183D3D;
+    --color-3:#040D12;
+}
+
+body{
+    background-color: var(--color-1);
+    color: var(--color-3);
+}
+
+h1{
+    font-size: 3rem;
+    text-align: center;
+}
+
+h2{
+    font-size: 2rem;
+    text-align: center;
+}
+
+section{
+    margin: 20px 30px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--color-0);
+}
+
+.titulo p{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.code p{
+    margin: 0px 20px;
+    padding: 15px 25px;
+    background-color: #ffffffd3;
+    border-radius: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.creditos{
+    background-color: var(--color-2);
+    color: var(--color-0);
+    font-size: 1.2em;
+}
