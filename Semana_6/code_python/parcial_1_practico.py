@@ -41,8 +41,11 @@ def matrixRotar(vector,a):
     return vector;
 
 
-for i in range(nLados): 
+for i in range(nLados): #Rotar el radio para obtener los vertices del poligono
     vertexTotal.append(matrixRotar([h,0],angulo*i));
+
+for i in range(nLados): #Orientar correctamente el polígono
+    vertexTotal[i] = matrixRotar(vertexTotal[i],angulo/2)
 
 for i in range(len(vertexTotal)):
     vertexTotal[i][0] = centro[0] + vertexTotal[i][0];
