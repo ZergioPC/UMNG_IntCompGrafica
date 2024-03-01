@@ -1,4 +1,4 @@
-import pygame,sys,math,cuadricula
+import pygame,sys,math
 
 #VARIABLES DE LA PANTALLA
 alto = 400;
@@ -57,15 +57,12 @@ pygame.init();
 pygame.display.set_caption("Parcial Practico - Corte 1");
 display = pygame.display.set_mode((largo,alto));
 
-cuad = cuadricula.cuadricula(display,negro,alto,largo,dx)
-
 while True:
     for e in pygame.event.get():
         if(e.type == pygame.QUIT):
             sys.exit();
 
     display.fill((255,255,255));
-    cuad.draw();
 
     pygame.draw.circle(display,(255,0,0),(centro),5);
     for i in range(len(vertexTotal)):

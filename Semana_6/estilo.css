@@ -1,0 +1,51 @@
+:root{
+    --color-0:#B67352;
+    --color-1:#ECB159;
+    --color-2:#FEFBF6;
+    --color-3:#8CB9BD;
+}
+
+body{
+    background-color: var(--color-0);
+    color: black;
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.4em;
+}
+
+section{
+    margin: 10px 20px;
+    padding: 10px 20px;
+    background-color: var(--color-2);
+    border-radius: 20px;
+    box-shadow: 4px 4px var(--color-1);
+}
+
+h1{
+    margin: 30px;
+    font-size: 5rem;
+    text-align: center;
+    color: white;
+    text-shadow: 4px 4px black;
+}
+
+h2{
+    margin: 10px 0;
+    font-size: 3.5em;
+    text-align: center;
+    color: var(--color-1);
+    text-shadow: 4px 4px var(--color-0);
+}
+
+b{
+    color: var(--color-0);
+}
+
+#code{
+    padding: 20px;
+    background-color: var(--color-3);
+    border-radius: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+}
