@@ -8,12 +8,22 @@ centro = [largo/2,alto/2]
 dx = 5; #Unidad minima de medida
 
 #USUARIO
-print("|- - - Dibujar Poligono - - -|");
-print("Grafique una Poligono en un plano cartesiano");
+while True:
+    print("|- - - Dibujar Poligono - - -|");
+    print("Grafique una Poligono en un plano cartesiano");
 
-apo = int(input("Ingrese la apotema:  "))*dx       
-L = int(input("Ingrese longitude del Lado:  "))*dx
-nLados = int(input("Ingrese numero de Lados:  "))
+    apo = abs(int(input("Ingrese la apotema(max 30):  "))*dx);       
+    L = abs(int(input("Ingrese longitude del Lado(max 30):  "))*dx);
+    nLados = math.floor(abs(int(input("Ingrese numero de Lados(min 3):  "))));
+
+    if(apo/dx > 30):
+        print("\nError: apotema Fuera de rango\n\n");
+    elif(L/dx > 30):
+        print("\nError: longitude de lado Fuera de Rango\n\n");
+    elif(nLados < 3):
+        print("\nError: Numero de lados insuficiente\n\n");
+    else:
+        break;
 
 
 #COLORES
@@ -22,17 +32,12 @@ azul = (0,0,150)
 
 #Calculos de la figura
 h = math.sqrt(apo**2+(L/2)**2); #Hipotenusa
-
-
 vertexTotal = [];   #Arreglo con las coordenadas de los vertices de la figura
-
 angulo =(360/(nLados)); #Angulo de rotación entre cada vertice
-print(angulo)
 
 def matrixRotar(vector,a):
     vector = [round((vector[0]*math.cos(math.radians(a)))-(vector[1]*math.sin(math.radians(a))),3),
             round((vector[0]*math.sin(math.radians(a)))+(vector[1]*math.cos(math.radians(a))),3)]; #Matriz de rotación
-    print(vector);
     return vector;
 
 
@@ -42,7 +47,6 @@ for i in range(nLados):
 for i in range(len(vertexTotal)):
     vertexTotal[i][0] = centro[0] + vertexTotal[i][0];
     vertexTotal[i][1] = centro[1] - vertexTotal[i][1];
-    pass
 
 #Declaraciones para Pygame
 pygame.init();
