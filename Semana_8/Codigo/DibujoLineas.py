@@ -14,9 +14,6 @@ pygame.init();
 display = [600,400];
 space = 10;
 
-screen = pygame.display.set_mode(display);
-running = True;
-
 #TABLERO
 def bresenham_line(x0, y0, x1, y1):
     dx = abs(x1 - x0);
@@ -74,9 +71,23 @@ def print_matrix(matrix):
 matrix = [['0' for _ in range(20)] for _ in range(20)]
 
 # Dibujar una línea de (1, 1) a (18, 18)
-draw_line(matrix, 0, 5, 18, 10)
+
+while True:
+    print("- - - Graficar Círculo - - -");
+    auxX1 = int(input("Ingrese la Coordenada x1 (menor a 20):  "));
+    auxY1 = int(input("Ingrese la Coordenada y1 (menor a 20):  "));
+
+    auxX2 = int(input("Ingrese la Coordenada x2 (menor a 20):  "));
+    auxY2 = int(input("Ingrese la Coordenada y2 (menor a 20):  "));
+    break;
+
+draw_line(matrix, auxX1, auxY1, auxX2, auxY2)
 
 #Pygame Ejecución
+
+screen = pygame.display.set_mode(display);
+running = True;
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
