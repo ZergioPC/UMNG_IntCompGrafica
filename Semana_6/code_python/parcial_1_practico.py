@@ -12,13 +12,11 @@ while True:
     print("|- - - Dibujar Poligono - - -|");
     print("Grafique una Poligono en un plano cartesiano");
 
-    apo = abs(int(input("Ingrese la apotema(max 30):  "))*dx);       
+    apo = 30;       
     L = abs(int(input("Ingrese longitude del Lado(max 30):  "))*dx);
     nLados = math.floor(abs(int(input("Ingrese numero de Lados(min 3):  "))));
 
-    if(apo/dx > 30):
-        print("\nError: apotema Fuera de rango\n\n");
-    elif(L/dx > 30):
+    if(L/dx > 30):
         print("\nError: longitude de lado Fuera de Rango\n\n");
     elif(nLados < 3):
         print("\nError: Numero de lados insuficiente\n\n");
