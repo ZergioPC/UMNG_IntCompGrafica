@@ -1,19 +1,10 @@
-matrix1=[
-    [1,2,3],
-    [4,5,6],
-    [7,8,9]
-];
+import math
 
-matrix2=[
-    [1,2,3],
-    [4,5,6],
-    [7,8,9]
-];
+# Función de multiplicación de matrices
 
 def matrixTimes(matA,matB):
-   
     if(len(matA) != len(matB[0])):
-        return "error: tamaño de las matrices no permite la multiplicación";
+        return "Error, Tamaño de matrices no valido";
     else:
         matrixAux = [];
         
@@ -27,11 +18,26 @@ def matrixTimes(matA,matB):
             matrixAux.append(aux);    
         return matrixAux;
 
-def matrixShow(matrix):
-    if(type(matrix) == str):
-        print(matrix);
-    elif(type(matrix) == list):
-        for i in range(len(matrix)):
-            print(matrix[i]);
+#Función de escalado
 
-matrixShow(matrixTimes(matrix1,matrix2));
+def escalar(vect,escalar):
+    result = vect;
+    
+    for i in range(len(result)):
+            result[i] = result[i]*escalar[i];
+
+    return result;
+
+# Función de Rotación
+
+def rotacion(vector,a):
+    rotar = [round((vector[0]*math.cos(math.radians(a)))-(vector[1]*math.sin(math.radians(a)))),
+            round((vector[0]*math.sin(math.radians(a)))+(vector[1]*math.cos(math.radians(a))))];
+
+    return rotar;
+
+#Mostrar matrices
+
+def matrixShow(matrix):
+    for i in range(len(matrix)):
+        print(matrix[i]);
