@@ -73,7 +73,7 @@ matrix = [['0' for _ in range(20)] for _ in range(20)]
 # Dibujar una línea de (1, 1) a (18, 18)
 
 while True:
-    print("- - - Graficar Círculo - - -");
+    print("- - - Graficar Lineas - - -");
     auxX1 = int(input("Ingrese la Coordenada x1 (menor a 20):  "));
     auxY1 = int(input("Ingrese la Coordenada y1 (menor a 20):  "));
 

@@ -30,6 +30,23 @@ h1{
     background-color: var(--color-2);
 }
 
+.home{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    padding: 5px 10px;
+    display: block;
+    background-color:var(--color-2);
+    text-decoration: none;
+    color: white;
+}
+
+.home:hover{
+    transform: scale(1.2);
+    background-color: var(--color-1);
+}
+
 section{
     margin: 20px;
     padding: 20px;

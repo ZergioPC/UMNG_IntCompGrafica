@@ -32,6 +32,23 @@ h2{
     box-shadow: 4px 4px var(--color-1);
 }
 
+.home{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    margin: 0;
+    padding: 5px 10px;
+    display: block;
+    background-color:var(--color-1);
+    text-decoration: none;
+    color: white;
+}
+
+.home:hover{
+    transform: scale(1.2);
+    background-color: var(--color-2);
+}
+
 /*Actividad*/
 
 .activ{

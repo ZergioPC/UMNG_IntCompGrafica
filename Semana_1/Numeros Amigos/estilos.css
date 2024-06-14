@@ -11,6 +11,24 @@ h1{
     font-size: 3em;
 }
 
+a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    padding: 5px 10px;
+    display: block;
+    background-color:white;
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover{
+    transform: scale(1.2);
+    background-color: blue;
+    color: white;
+}
+
 .imput{
     display: flex;
     flex-direction: column;

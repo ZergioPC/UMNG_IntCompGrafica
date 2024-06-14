@@ -27,6 +27,23 @@ section{
     background-color: var(--color-0);
 }
 
+.home{
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    margin: 0;
+    padding: 5px 10px;
+    display: block;
+    background-color:var(--color-2);
+    text-decoration: none;
+    color: white;
+}
+
+.home:hover{
+    transform: scale(1.2);
+    background-color: var(--color-3);
+}
+
 .titulo p{
     font-size: 1.5rem;
     text-align: center;

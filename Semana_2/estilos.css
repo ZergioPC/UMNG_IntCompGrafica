@@ -24,6 +24,25 @@ h1,h2{
     font-weight: bolder;
 }
 
+.home{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    padding: 5px 10px;
+    display: block;
+    background-color: var(--blanco);
+    text-decoration: none;
+    color: var(--sombras);
+    border-radius: 15px;
+}
+
+.home:hover{
+    transform: scale(1.2);
+    background-color: var(--sombras);
+    color: var(--color1);
+}
+
 .actividad{
     margin: 40px;
     padding: 10px 20px;
