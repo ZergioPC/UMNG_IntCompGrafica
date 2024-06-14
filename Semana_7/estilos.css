@@ -1,0 +1,242 @@
+:root{
+    --color-0: rgb(255, 255, 255);
+    --color-1: rgb(255, 245, 225);
+    --color-2: rgb(255, 105, 105);
+    --color-3: rgb(200, 000, 054);
+    --color-4: rgb(012, 024, 068);
+    --color-4-low: rgba(12, 24, 68, 0.918);
+}
+
+/* <weight>: Use a value from 200 to 700 */
+
+*{
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+}
+
+body{
+    background-color: var(--color-3);
+    overflow: hidden;
+}
+
+section{
+    color: var(--color-4);
+    transition-duration: 200ms;
+}
+
+a{
+    display: block;
+    padding: 10px;
+    margin: 10px;
+    position: absolute;
+    text-decoration: none;
+    color: var(--color-1);
+    background-color: var(--color-2);
+}
+
+a:hover{
+    transform: scale(1.2);
+    color: var(--color-2);
+    background-color: var(--color-1);
+}
+
+button{
+    background-color: var(--color-2);
+    color: var(--color-1);
+    border: 2px solid var(--color-1);
+}
+
+button:hover{
+    background-color: var(--color-1);
+    color: var(--color-2);
+    border: 2px solid var(--color-2);
+}
+
+h1{
+    color: var(--color-1);
+}
+
+.info{
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    margin-right: 30px;
+    margin-top: 20px;
+    color: var(--color-4)
+}
+
+.info p{
+    margin: 0;
+}
+
+#menu{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* MARK: Codigo */
+.codigo{
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-4-low);
+    backdrop-filter: blur(5px);
+    overflow-y: scroll;
+}
+
+.codigo button{
+    margin: 20px;
+    padding: 5px 10px;
+    border-radius: 50%;
+
+}
+
+.codigo code{
+    margin-bottom: 30px;
+    color: var(--color-1);
+    width: 90vw;
+}
+
+
+/* MARK: Hiders */
+
+.hide{
+    transform: translateY(100vh);
+}
+
+.off{
+    display: none;
+}
+
+#back{
+    z-index: 30;
+    position: absolute;
+    width: 100px;
+    left: calc(50% - 50px);
+    bottom: 20px;
+}
+
+/* MARK: Tarjetas */
+
+#slider_section{
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    width: calc(100% - 120px);
+    height: calc(100% - 120px);
+    margin: 30px;
+    padding: 30px;
+    background-color: var(--color-1);
+    border-radius: 20px;
+}
+
+.main_container{
+    position: relative;
+    height: 80vh;
+    text-align: center;
+    overflow: hidden;
+}
+
+.tarjet_container{
+    z-index: 5;
+    box-sizing: border-box;
+    position: absolute;
+    margin: 0 30px;
+    padding: 20px;
+    height: 70vh;
+    border-radius: 20px;
+    background-color: var(--color-2);
+    transition: 200ms;
+}
+
+.tarjet_container figure{
+    max-height: 300px;
+    height: 30vw;
+}
+
+.tarjet_container img{
+    height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+}
+.tarjet_container h3{
+    margin: 0;
+    font-size: 2em;
+}
+
+.tarjet_container h4{
+    margin: 0;
+    color: var(--color-3);
+}
+
+.slider_btns{
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+}
+
+.slider_btns button {
+    height: 50px;
+}
+
+/* MARK: Animaciones */
+.animation_SlideNext{
+    animation-name: move_slide_next;
+}
+
+.animation_SlidePrev{
+    animation-name: move_slide_prev;
+}
+
+.animation_SlideNext , .animation_SlidePrev {
+    animation-duration: 300ms;
+}
+
+@keyframes move_slide_next{
+    0%{
+        transform: none;
+    }
+    30%{
+        transform: skewX(4deg);
+    }
+    60%{
+        transform: skewX(-6deg);
+    }
+    100%{
+        transform: none;
+    }
+}
+
+
+@keyframes move_slide_prev{
+    0%{
+        transform: none;
+    }
+    30%{
+        transform: skewX(-4deg);
+    }
+    60%{
+        transform: skewX(6deg);
+    }
+    100%{
+        transform: none;
+    }
+}

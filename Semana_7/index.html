@@ -1,11 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="estilos.css">
     <title>Relleno y Recorte</title>
 </head>
 <body>
-    <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVNgxpF8Y=/?moveToViewport=-641,-705,3030,2102&embedId=660702884627" frameborder="0" scrolling="no" allow=""></iframe>
-</body>
+    <a href="../index.html">home</a>
+    <section id="menu">
+        <h1>Relleno y Recorte de Figuras</h1>
+        <div>
+            <button id="btn_relleno">Relleno de Figuras</button>
+            <button id="btn_recorte">Recorte de Figuras</button>
+        </div>
+    </section>
+    <section id="slider_section" class="hide">
+        <div class="main_container off" id="div_relleno">
+            <div><h2>Relleno de figuras</h2></div>
+            <div class="tarjet_container tarjet_fill">
+                <h3>Por Inundación</h3>
+                <h4>Flood Fill</h4>
+                <p>Parte de un píxel determinado, llamado semilla, y cambia su color a uno deseado. Luego, observa los píxeles vecinos y repite el proceso para aquellos que tienen el mismo color que la semilla original. De esta manera, extiende el nuevo color a todos los píxeles conectados que comparten el mismo color que la semilla.</p>
+                <figure><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Recursive_Flood_Fill_4_%28aka%29.gif" alt="img_flood_fill"></figure>
+                <button id="btn_fill_flood">codigo</button>
+            </div>
+            <div class="tarjet_container tarjet_fill">
+                <h3>Por Escaneo de Línea</h3>
+                <h4>ScanLine Fill</h4>
+                <p>Este algoritmo divide el polígono en tramos horizontales y luego utiliza un algoritmo de intersección para determinar qué segmentos de línea están dentro del polígono. Luego, colorea los píxeles entre cada par de intersecciones.</p>
+                <figure><img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Smiley_fill.gif" alt="img_scanline_fill"></figure>
+                <button id="btn_fill_line">codigo</button>
+            </div>
+            <div class="tarjet_container tarjet_fill">
+                <h3>Por Polígonos</h3>
+                <h4>Polygon Fill</h4>
+                <p>El algoritmo de relleno de polígonos es una técnica utilizada en computación gráfica para colorear áreas definidas por polígonos en una imagen. Su objetivo es determinar qué píxeles están dentro del polígono y cuáles están fuera, y luego colorear los píxeles dentro del polígono con un color específico.</p>
+                <figure><img src="https://coolbutuseless.github.io/img/polygon-fill/polygon-o.gif" alt="img_polygon_fill"></figure>
+                <button id="btn_fill_poly">codigo</button>
+            </div>
+        </div>
+        <div class="main_container off" id="div_recorte">
+            <div><h2>Recorte de figuras</h2></div>
+            <div class="tarjet_container tarjet_clip">
+                <h3>Por Línea</h3>
+                <h4>Line Clipping</h4>
+                <p>Es una técnica utilizada en computación gráfica para determinar qué partes de una línea son visibles en la ventana de visualización (viewport) y cuáles están fuera de ella. Esto es esencial para el proceso de renderizado, ya que permite dibujar solo las porciones relevantes de las líneas en la pantalla.</p>
+                <figure><img src="https://user-images.githubusercontent.com/34531635/65632368-26a87080-dff7-11e9-8c37-e9b6b05750cd.gif" alt="img_line_clip"></figure>
+                <button id="btn_clip_line">codigo</button>
+            </div>
+            <div class="tarjet_container tarjet_clip">
+                <h3>Por Polígonos</h3>
+                <h4>Polygon Clipping</h4>
+                <p>El recorte de polígonos, también conocido como "recorte de polígonos" o "recorte de áreas", es un proceso en computación gráfica que implica determinar qué partes de un polígono están dentro o fuera de una región de recorte definida. Esta región de recorte generalmente corresponde al área de visualización en la pantalla, también conocida como ventana de visualización o viewport.</p>
+                <figure><img src="https://cdn.tutsplus.com/cdn-cgi/image/width=360/gamedev/uploads/2013/10/Cube-Slice-Corner.gif" alt="img_polygon_clip"></figure>
+                <button id="btn_clip_poly">codigo</button>
+            </div>
+        </div>
+        <div class="slider_btns">
+            <button id="prev">⬅</button>
+            <button id="next">➡</button>
+        </div>
+    </section>
+    <div class="info">
+        <p>Hecho por: Sergio Palacios</p>
+        <p>Clase de Introducción a la Computaci&oacute;n Gr&aacute;fica</p>
+        <p>Universidad Militar Nueva Granada</p>
+        <p>2024</p>
+    </div>
+    <button id="back" class="hide">Volver</button>
+    <div class="codigo off">
+        <button>x</button>
+        <code></code>
+    </div>
+    <script src="./script.js"></script>
 </html>
