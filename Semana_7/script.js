@@ -159,7 +159,6 @@ async function getCodigo(url,element){
     await fetch(url)
     .then(res => res.text())
     .then(content => {
-        console.log(content);
         element.style.whiteSpace = 'pre';
         element.innerText = content;
     });
