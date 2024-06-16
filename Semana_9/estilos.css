@@ -1,0 +1,94 @@
+:root{
+    --color-1: rgb(243, 247, 236);
+    --color-2: rgb(232, 141, 103);
+    --color-3: rgb(0, 105, 137);
+    --color-4: rgb(0, 92, 120);
+}
+
+*{
+    font-family: "Playwrite DE Grund";
+    font-optical-sizing: auto;
+    color: var(--color-4);
+}
+
+body{
+    background-color: var(--color-2);
+}
+
+header{
+    padding: 20px 20px;
+    background-color: var(--color-3);
+}
+
+header p, header b{
+    color: var(--color-1);
+}
+
+section{
+    margin: 20px;
+    padding: 20px;
+    background-color: var(--color-3);
+}
+
+h1,h2{
+    text-align: center;
+    color: var(--color-1);
+}
+
+p{
+    text-align: justify;
+}
+
+li{
+    margin: 20px 0;
+    padding: 10px;
+    background-color: var(--color-1);
+}
+
+li::marker{
+    background-color: var(--color-2);
+    color: var(--color-1);
+    font-weight: bold;
+}
+
+img{
+    width: calc(100% - 30px);
+}
+
+code{
+    display: block;
+    width: calc(100% - 40px);
+    height: 700px;
+    margin: 20px 30px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: scroll;
+    color: var(--color-1);
+    background-color: var(--color-4);
+}
+
+footer{
+    padding: 10px;
+}
+
+footer p{
+    margin: 5px 0;
+    color: var(--color-1);
+}
+
+.home{
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition-duration: 200ms;
+    background-color: var(--color-1);
+}
+
+.home:hover{
+    padding: 14px 24px;
+    background-color: var(--color-4);
+    color: var(--color-2);
+}
