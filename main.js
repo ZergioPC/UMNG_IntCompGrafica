@@ -1,4 +1,4 @@
-import {mapa as mapa_class,player as player_class} from './world.js'; 
+import {mapa as mapa_class,player as player_class,dialogo} from './world.js'; 
 import {props,npcs} from './entities.js';
 
 const $canvas = document.getElementById('canvas');
@@ -12,6 +12,7 @@ const ctx = $canvas.getContext('2d');
 const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,'/img/mapa.png');
 const casillas = {x:80,y:80};
 const player = new player_class(ctx,'/img/player_walk.png','/img/player_run.png',80,lienzo)
+const dialogoBox = new dialogo(ctx);
 
 const vel = 8;
 let animation = false;
@@ -19,6 +20,7 @@ let animation = false;
 const delta_time = 50;
 let stopTime = 10;
 
+let pointer = [0,0];
 const coords = {x:0,y:0};
 const pos_mapa = {x:0,y:0};
 const pos_player = {x:0,y:0};
@@ -32,6 +34,12 @@ let action = false;
 
 //MARK: Fisicas y Mecanicas
 let direccion = 'sur';
+const direccion_list = {
+    norte: 0,
+    sur: 3,
+    oeste: 2,
+    este: 1
+}
 
 //1. Ubicar Npcs
 for (let i = 0; i < npcList.length; i++) {
@@ -62,6 +70,23 @@ function checkColision(vectX,vectY){
     }
 }
 
+function npcEvent(vectX,vectY){
+    for(let u=0; u < npcList.length; u++){
+        for (let i = 0; i < npcList[u].actZone.length; i++) {
+            if(vectY == npcList[u].actZone[i][1] && vectX == npcList[u].actZone[i][0]){ 
+                action = true;
+                npcList[u].frame = direccion_list[direccion];
+                dialogoBox.texto = npcList[u].dialogo;
+                dialogoBox.display = true;
+                break;
+            }
+        }
+        if(action == true){
+            break;
+        }
+    }
+}
+
 //MARK: Controles
 let keyPress = true;
 let keyName;
@@ -79,20 +104,24 @@ function moverse(posMapa,posPlayer,direction,limite,desfase){
 const direcciones = new Map([
     ['KeyW', function(){
         player.animation = 3;
+        pointer = [coords.x,coords.y-1];
         checkColision(coords.x,coords.y-1);
         direccion = 'norte';
     }],
     ['KeyA', function(){
+        pointer = [coords.x-1,coords.y];
         player.animation = 1;
         checkColision(coords.x-1,coords.y);
         direccion = 'oeste';
     }],
     ['KeyS', function(){
+        pointer = [coords.x,coords.y+1];
         player.animation = 0;
         checkColision(coords.x,coords.y+1);
         direccion = 'sur';
     }],
     ['KeyD', function(){
+        pointer = [coords.x+1,coords.y]
         player.animation = 2;
         checkColision(coords.x+1,coords.y);
         direccion = 'este';
@@ -131,6 +160,20 @@ const movimientos = new Map([
     }]
 ]);
 
+const acciones = new Map([
+    ['Space',function(){
+        if(!action){
+            npcEvent(pointer[0],pointer[1]);
+        }else{
+            if(dialogoBox.display){
+                setTimeout(()=>{
+                    action = dialogoBox.nextLine();
+                },100)
+            }
+        }
+    }]
+]);
+
 //#region 3. detection de señales
 
 setInterval(()=>{
@@ -142,8 +185,9 @@ setInterval(()=>{
 
 
 document.addEventListener('keydown',(e)=>{
+    //console.log(e.code);
     if(movimientos.has(e.code)){
-        if(keyPress == true){
+        if(keyPress){
             
             keyPress = false;
             keyName = e.code;
@@ -175,6 +219,9 @@ document.addEventListener('keydown',(e)=>{
                 keyPress = true;
             },(delta_time*stopTime))
         }
+    }else if(acciones.has(e.code)){
+        //console.log(keyPress);
+        acciones.get(e.code)();
     }else{
         keyPress = true;
     }
@@ -182,7 +229,7 @@ document.addEventListener('keydown',(e)=>{
 
 
 //MARK: Render
-
+/* 
 setInterval(()=>{
     if(mapa.frame == 5){
         mapa.frame = 0;
@@ -200,6 +247,7 @@ setInterval(()=>{
         player.frame = 0;
     }
 },120);
+ */
 
 //#region 1. canvas
 setInterval(()=>{
@@ -208,6 +256,7 @@ setInterval(()=>{
     mapa.draw(pos_mapa.x,pos_mapa.y);
     player.drawCtx(pos_player.x,pos_player.y);
     drawNPCs(pos_mapa.x,pos_mapa.y);
+    dialogoBox.draw();
 },60);
 
 

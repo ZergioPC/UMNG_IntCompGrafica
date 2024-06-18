@@ -1,5 +1,6 @@
 import { edificio,letrero } from "./colisiones.js";
 import {npc} from './world.js'; 
+import {dialogos as txt} from './dialogos.js';
 
 const $canvas = document.getElementById('canvas');
 const ctx = $canvas.getContext('2d');
@@ -15,7 +16,7 @@ const lago_izq = new edificio(0,3,4,16);
 const lago_der = new edificio(47,50,4,16);
 
 //#region 1.NPCs
-const test = new npc(ctx,'/img/npcTemplate.png',80,[6,5],'xd');
+const test = new npc(ctx,'/img/npcTemplate.png',80,[6,5],txt.test);
 
 //MARK: Exports
 const props = {

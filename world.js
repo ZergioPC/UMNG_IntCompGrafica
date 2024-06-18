@@ -109,14 +109,27 @@ class npc{
 
         //Interacciones
         this.actZone = [];
-        for(let i=0; i<3 ; i++){
-            for(let j=0; j<3 ; j++){
+        for(let i=0; i<1 ; i++){
+            for(let j=0; j<1 ; j++){
                 this.actZone.push([j+this.pos[0],i+this.pos[1]]);
             }
         }
     }
 
     draw(cordX,cordY){
+        this.ctx.fillStyle = "#0000003e";
+        this.ctx.fillRect(
+            this.x - cordX + (this.escala*0.2)
+            ,this.y - cordY - 40 + (this.escala*0.83),
+            (this.escala*0.6),(this.escala*0.1)
+        );
+
+        this.ctx.fillRect(
+            this.x - cordX + (this.escala*0.25)
+            ,this.y - cordY - 40 + (this.escala*0.83),
+            (this.escala*0.5),(this.escala*0.15)
+        );
+        
         /*         
         //Hitbox
         this.ctx.fillRect(
@@ -136,4 +149,56 @@ class npc{
     }
 }
 
-export {mapa,player,npc};
+class dialogo{
+    constructor(ctx){
+        //canvas
+        this.ctx = ctx;
+
+        this.display = false;
+
+        //Letrero
+        this.img = new Image();
+        this.img.src = "/img/dialogue_box.png";
+        this.avatar = new Image();
+        this.avatar.src = '/img/avatarTemplate.png';
+
+        //Texto
+        this.texto = {};
+        this.line = 0;
+    }
+
+    draw(){
+        if(this.display == true){
+            //Opacity
+            this.ctx.fillRect(0,0,720,480); 
+            //Avatar
+            if(this.avatar.src != ''){
+                this.ctx.drawImage(this.avatar,500,220,26*5,26*5);    
+            }
+            //Bg
+            this.ctx.drawImage(this.img,60,300,600,180);
+            //Name
+            this.ctx.font = 'bold 30px Courier';
+            this.ctx.fillStyle = "#4a111b";
+            this.ctx.fillText(this.texto.name,100,395);
+            //Txt 1
+            this.ctx.font = '24px Courier';
+            this.ctx.fillStyle = "#000000";
+            this.ctx.fillText(this.texto.talk[this.line][0],100,425);
+            this.ctx.fillText(this.texto.talk[this.line][1],100,449);
+        }
+    }
+
+    nextLine(){
+        if(this.line == this.texto.talk.length-1){
+            this.line = 0;
+            this.display = false;
+            return false;
+        }else{
+            this.line++;
+            return true;
+        }
+    }
+}
+
+export {mapa,player,npc,dialogo};
