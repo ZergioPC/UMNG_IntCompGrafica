@@ -58,4 +58,47 @@ class stand {
     }
 }
 
-export {edificio,stand};
+class objeto {
+    constructor(ctx,x,y,size,src){
+        //Posicion
+        this.x = 0;
+        this.y = 0;
+        this.origen = [x,y]
+
+        //Asset
+        this.ctx = ctx;
+        this.img = new Image();
+        this.img.src =  src;
+
+        //escalado
+        this.size = size;
+
+        //Coilisiones
+        this.zona = []
+        for(let i=0; i<1 ; i++){
+            for(let j=0; j<1 ; j++){
+                this.zona.push([j+this.origen[0],i+this.origen[1]]);
+            }
+        }
+    }
+
+    draw(xPos,yPos,frame){
+        /* 
+        //Hitbox
+        this.ctx.fillRect(
+            this.x - xPos,
+            this.y - yPos - 40,
+            80,80
+        ); 
+         */
+        this.ctx.drawImage(
+            this.img, //Imagen
+            this.size*frame, 0,  //Desfasado
+            this.size,this.size,      //Escalar
+            this.x - xPos - 12, this.y - yPos - 60,    //Posición inicial
+            100,100      //Escala de la Imagen
+        );
+    }
+}
+
+export {edificio,stand,objeto};

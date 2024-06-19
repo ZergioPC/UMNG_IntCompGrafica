@@ -16,26 +16,29 @@ const dialogoBox = new dialogo(ctx);
 const alertBox = new alert_class(ctx);
 
 const vel = 8;
-let animation = false;
+let playerAnimation = false;
 
 const delta_time = 50;
 let stopTime = 10;
 
 let pointer = [0,0];
 const coords = {x:0,y:0};
-const pos_mapa = {x:0,y:0};
+const pos_mapa = {x:1840,y:1040};
 const pos_player = {x:0,y:0};
 const pos_global = {x:0,y:0};
 
 const colisionList = props.colisions;
-const npcList = npcs;
 const standList = props.stands;
+const arbolList = props.arboles;
+const npcList = npcs;
+
+//MARK: Fisicas y Mecanicas
 
 let colision = false;
 let action = false;
 let alert = false;
 
-//MARK: Fisicas y Mecanicas
+
 let direccion = 'sur';
 const direccion_list = {
     norte: 0,
@@ -44,19 +47,31 @@ const direccion_list = {
     este: 1
 }
 
-//0. Ubicar Stands
+let frame_arbol = 0;
+
+//#region 1. Ubicación y Dibujado
+for (let i = 0; i < arbolList.length; i++) {
+    arbolList[i].x = ((arbolList[i].origen[0]-1)*casillas.x);
+    arbolList[i].y = ((arbolList[i].origen[1]-1)*casillas.y);
+}
+
+function drawArboles(posX,posY,frame){
+    for (let i = 0; i < arbolList.length; i++) {
+        arbolList[i].draw(posX,posY,frame);
+    }
+}
+
 for (let i = 0; i < standList.length; i++) {
     standList[i].x = ((standList[i].origen[0]-1)*casillas.x);
     standList[i].y = ((standList[i].origen[1]-1)*casillas.y);
 }
 
 function drawStands(posX,posY){
-    for (let i = 0; i < npcList.length; i++) {
+    for (let i = 0; i < standList.length; i++) {
         standList[i].draw(posX,posY);
     }
 }
 
-//1. Ubicar Npcs
 for (let i = 0; i < npcList.length; i++) {
     npcList[i].x = ((npcList[i].pos[0]-1)*casillas.x);
     npcList[i].y = ((npcList[i].pos[1]-1)*casillas.y);
@@ -222,6 +237,7 @@ const acciones = new Map([
         }
     ],
     ['KeyQ',function(){
+        console.log(`x: ${pos_mapa.x}  y: ${pos_mapa.y}`);
         console.log(`x: ${coords.x}  y: ${coords.y}`);
     }]
 ]);
@@ -261,13 +277,13 @@ document.addEventListener('keydown',(e)=>{
                     }else{
                         movimientos.get(keyName)(vel);
                     }
-                    animation = true;
+                    playerAnimation = true;
                 }
             },delta_time);
             
             setTimeout(()=>{
                 clearInterval(move);
-                animation = false;
+                playerAnimation = false;
                 keyPress = true;
             },(delta_time*stopTime))
         }
@@ -281,7 +297,7 @@ document.addEventListener('keydown',(e)=>{
 
 
 //MARK: Render
-/* 
+
 setInterval(()=>{
     if(mapa.frame == 5){
         mapa.frame = 0;
@@ -289,7 +305,7 @@ setInterval(()=>{
         mapa.frame++;
     }
 
-    if(animation){
+    if(playerAnimation){
         if(player.frame == 3){
             player.frame = 0;
         }else{
@@ -298,8 +314,14 @@ setInterval(()=>{
     }else{
         player.frame = 0;
     }
+
+    if(frame_arbol == 17){
+        frame_arbol = 0;
+    }else{
+        frame_arbol++;
+    }
 },120);
- */
+
 
 //#region 1. canvas
 setInterval(()=>{
@@ -308,6 +330,7 @@ setInterval(()=>{
     mapa.draw(pos_mapa.x,pos_mapa.y);
     player.drawCtx(pos_player.x,pos_player.y);
     drawNPCs(pos_mapa.x,pos_mapa.y);
+    drawArboles(pos_mapa.x,pos_mapa.y,frame_arbol);
     drawStands(pos_mapa.x,pos_mapa.y);
     dialogoBox.draw();
     alertBox.draw();

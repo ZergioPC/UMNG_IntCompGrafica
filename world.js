@@ -20,7 +20,7 @@ class mapa {
             y/10+(200*this.frame),  //Desfasado
             this.renderX,this.renderY,      //Escalar
             0,0,    //Posición inicial
-            this.sizeX,this.sizeY,      //Escala de la Imagen
+            this.sizeX,this.sizeY      //Escala de la Imagen
         );
     }
 }
