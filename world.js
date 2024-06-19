@@ -161,10 +161,13 @@ class dialogo{
         this.img.src = "/img/dialogue_box.png";
         this.avatar = new Image();
         this.avatar.src = '/img/avatarTemplate.png';
+        this.keyImg = new Image();
+        this.keyImg.src = "/img/action_keys.png";
 
         //Texto
         this.texto = {};
         this.line = 0;
+        this.ready = false;
     }
 
     draw(){
@@ -186,6 +189,10 @@ class dialogo{
             this.ctx.fillStyle = "#000000";
             this.ctx.fillText(this.texto.talk[this.line][0],100,425);
             this.ctx.fillText(this.texto.talk[this.line][1],100,449);
+            //Key
+            if(this.ready){
+                this.ctx.drawImage(this.keyImg,0,0,35,12,620,450,80,26);
+            }
         }
     }
 
@@ -201,4 +208,40 @@ class dialogo{
     }
 }
 
-export {mapa,player,npc,dialogo};
+class alert {
+    constructor(ctx){
+        //canvas
+        this.ctx = ctx;
+        this.display = false;
+
+        //Letrero
+        this.img = new Image();
+        this.img.src = "/img/alert_box.png";
+        this.keysImg = new Image();
+        this.keysImg.src = "/img/action_keys.png";
+
+        //Texto
+        this.texto = '';
+        this.semana = '';
+        this.enlace;
+    }
+
+    draw(){
+        if(this.display == true){
+            //Opacity
+            this.ctx.fillRect(0,0,720,480); 
+            //Bg
+            this.ctx.drawImage(this.img,110,100,500,250);
+            //Txt 1
+            this.ctx.font = 'bold 30px Courier';
+            this.ctx.fillStyle = "#000000";
+            this.ctx.fillText(`¿Quieres visitar la `,190,200);
+            this.ctx.fillText(`${this.semana}?`,290,240);
+            //keys
+            this.ctx.drawImage(this.keysImg,0,0,35,12,230,270,120,40);
+            this.ctx.drawImage(this.keysImg,35,0,21,12,430,270,60,40);
+        }
+    }
+}
+
+export {mapa,player,npc,dialogo,alert};

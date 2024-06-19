@@ -1,4 +1,4 @@
-import { edificio,letrero } from "./colisiones.js";
+import { edificio,stand } from "./colisiones.js";
 import {npc} from './world.js'; 
 import {dialogos as txt} from './dialogos.js';
 
@@ -15,8 +15,11 @@ const lago_top = new edificio(0,50,0,3);
 const lago_izq = new edificio(0,3,4,16);
 const lago_der = new edificio(47,50,4,16);
 
-//#region 1.NPCs
+//#region 1. NPCs
 const test = new npc(ctx,'/img/npcTemplate.png',80,[6,5],txt.test);
+
+//#region 2. Stands
+const semana1 = new stand(ctx,6,8,'Semana_1','/img/statndprueba.png');
 
 //MARK: Exports
 const props = {
@@ -27,7 +30,11 @@ const props = {
         lago_top.zona,
         lago_izq.zona,
         lago_der.zona,
-        test.zona
+        test.zona,
+        semana1.zona
+    ],
+    stands : [
+        semana1
     ]
 }
 

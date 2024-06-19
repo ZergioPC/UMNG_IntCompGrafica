@@ -1,4 +1,4 @@
-import {mapa as mapa_class,player as player_class,dialogo} from './world.js'; 
+import {mapa as mapa_class,player as player_class,dialogo,alert as alert_class} from './world.js'; 
 import {props,npcs} from './entities.js';
 
 const $canvas = document.getElementById('canvas');
@@ -13,6 +13,7 @@ const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,'/img/map
 const casillas = {x:80,y:80};
 const player = new player_class(ctx,'/img/player_walk.png','/img/player_run.png',80,lienzo)
 const dialogoBox = new dialogo(ctx);
+const alertBox = new alert_class(ctx);
 
 const vel = 8;
 let animation = false;
@@ -28,9 +29,11 @@ const pos_global = {x:0,y:0};
 
 const colisionList = props.colisions;
 const npcList = npcs;
+const standList = props.stands;
 
 let colision = false;
 let action = false;
+let alert = false;
 
 //MARK: Fisicas y Mecanicas
 let direccion = 'sur';
@@ -39,6 +42,18 @@ const direccion_list = {
     sur: 3,
     oeste: 2,
     este: 1
+}
+
+//0. Ubicar Stands
+for (let i = 0; i < standList.length; i++) {
+    standList[i].x = ((standList[i].origen[0]-1)*casillas.x);
+    standList[i].y = ((standList[i].origen[1]-1)*casillas.y);
+}
+
+function drawStands(posX,posY){
+    for (let i = 0; i < npcList.length; i++) {
+        standList[i].draw(posX,posY);
+    }
 }
 
 //1. Ubicar Npcs
@@ -70,6 +85,25 @@ function checkColision(vectX,vectY){
     }
 }
 
+function checkEvent(vectX,vectY){
+    for(let u=0; u < standList.length; u++){
+        for (let i = 0; i < standList[u].evento.length; i++) {
+            if(vectY == standList[u].evento[i][1] && vectX == standList[u].evento[i][0]){ 
+                alert = true;
+                alertBox.semana = standList[u].semana;
+                alertBox.enlace = standList[u].link;
+                alertBox.display = true;
+                break;
+            }else{
+                alert = false; 
+            }
+        }
+        if(alert == true){
+            break;
+        }
+    }
+}
+
 function npcEvent(vectX,vectY){
     for(let u=0; u < npcList.length; u++){
         for (let i = 0; i < npcList[u].actZone.length; i++) {
@@ -77,6 +111,9 @@ function npcEvent(vectX,vectY){
                 action = true;
                 npcList[u].frame = direccion_list[direccion];
                 dialogoBox.texto = npcList[u].dialogo;
+                setTimeout(()=>{
+                    dialogoBox.ready = true;
+                },100);
                 dialogoBox.display = true;
                 break;
             }
@@ -162,15 +199,30 @@ const movimientos = new Map([
 
 const acciones = new Map([
     ['Space',function(){
-        if(!action){
+        if(!action && !alert){
+            dialogoBox.ready = false;
+            checkEvent(pointer[0],pointer[1])
             npcEvent(pointer[0],pointer[1]);
         }else{
             if(dialogoBox.display){
+                dialogoBox.ready = false;
                 setTimeout(()=>{
                     action = dialogoBox.nextLine();
+                    dialogoBox.ready = true;
                 },100)
             }
+            if(alertBox.display){
+                alertBox.enlace();
+            }
         }
+    }],
+    ['Escape',function(){
+            alert = false;
+            alertBox.display = false;
+        }
+    ],
+    ['KeyQ',function(){
+        console.log(`x: ${coords.x}  y: ${coords.y}`);
     }]
 ]);
 
@@ -256,7 +308,9 @@ setInterval(()=>{
     mapa.draw(pos_mapa.x,pos_mapa.y);
     player.drawCtx(pos_player.x,pos_player.y);
     drawNPCs(pos_mapa.x,pos_mapa.y);
+    drawStands(pos_mapa.x,pos_mapa.y);
     dialogoBox.draw();
+    alertBox.draw();
 },60);
 
 
