@@ -1,6 +1,10 @@
 import {mapa as mapa_class,player as player_class,dialogo,alert as alert_class} from './world.js'; 
 import {props,npcs} from './entities.js';
 
+/*  */
+const $img = document.querySelectorAll('#loadImg img');
+/*  */
+
 const $canvas = document.getElementById('canvas');
     const lienzo ={
         ancho:$canvas.width,
@@ -9,11 +13,11 @@ const $canvas = document.getElementById('canvas');
 const ctx = $canvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
 
-const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,'/img/mapa.png');
+const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,$img[10].src);
 const casillas = {x:80,y:80};
-const player = new player_class(ctx,'/img/player_walk.png','/img/player_run.png',80,lienzo)
-const dialogoBox = new dialogo(ctx);
-const alertBox = new alert_class(ctx);
+const player = new player_class(ctx,$img[15].src,$img[14].src,80,lienzo)
+const dialogoBox = new dialogo(ctx,$img[8].src,$img[7].src,$img[0].src);
+const alertBox = new alert_class(ctx,$img[1].src,$img[0].src);
 
 const vel = 8;
 let playerAnimation = false;

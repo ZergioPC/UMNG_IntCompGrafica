@@ -152,7 +152,7 @@ class npc{
 }
 
 class dialogo{
-    constructor(ctx){
+    constructor(ctx,src,avatar,keys){
         //canvas
         this.ctx = ctx;
 
@@ -160,11 +160,11 @@ class dialogo{
 
         //Letrero
         this.img = new Image();
-        this.img.src = "/img/dialogue_box.png";
+        this.img.src = src;
         this.avatar = new Image();
-        this.avatar.src = '/img/avatarTemplate.png';
+        this.avatar.src = avatar;
         this.keyImg = new Image();
-        this.keyImg.src = "/img/action_keys.png";
+        this.keyImg.src = keys;
 
         //Texto
         this.texto = {};
@@ -211,16 +211,16 @@ class dialogo{
 }
 
 class alert {
-    constructor(ctx){
+    constructor(ctx,src,keys){
         //canvas
         this.ctx = ctx;
         this.display = false;
 
         //Letrero
         this.img = new Image();
-        this.img.src = "/img/alert_box.png";
+        this.img.src = src;
         this.keysImg = new Image();
-        this.keysImg.src = "/img/action_keys.png";
+        this.keysImg.src = keys;
 
         //Texto
         this.texto = '';
