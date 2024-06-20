@@ -10,3 +10,7 @@ Al momento de iniciar con este repositorio, no sabía php o lenguajes de backend
 Actualización #1.1
 
 Me acabo de enterar que GithubPages no soporta PHP, así que aunque quisiera no hubiera podido usarlo aqui :'D
+
+Actualización #2
+
+He creado un minijuego para navegar entre las diferenes semanas, pienso sí es posible agregarle sonidos y música para que sea más interactivo

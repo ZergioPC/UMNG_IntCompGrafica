@@ -1,0 +1,227 @@
+:root{
+    --color-0: rgb(255, 255, 255);
+    --color-1: rgb(255, 251, 218);
+    --color-2: rgb(255, 236, 158);
+    --color-3: rgb(255, 187, 112);
+    --color-4: rgb(237, 148, 85);
+    --space: rgb(149, 223, 162);
+    --escape: rgb(223, 149, 149);
+    --shift: rgb(149, 187, 223);
+}
+
+body{
+    background-color: var(--color-1);
+}
+
+.alerta{
+    box-sizing: border-box;
+    padding: 40px;
+    z-index: 150;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-4);
+    color: var(--color-1);
+    font-size: 2em;
+}
+
+.font_titulo {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--color-4);
+}
+
+.font_txt {
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.font_deco {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;      
+}
+
+button{
+    user-select: none;
+    border: 3px solid var(--color-4);
+    border-radius: 10px;
+}
+
+/* MARK: Menu */
+
+#inicio{
+    z-index: 100;
+    box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+#inicio button{
+    background-color: var(--color-0);
+}
+
+/* MARK: Tutorial Celular */
+
+#movil,#pc{
+    z-index: 50;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+#movil .btn{
+    width: 40px;
+    height: 40px;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+}
+.container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* MARK: Tutorial Celular */
+
+.container article{
+    display: flex;
+    flex-direction: column;
+}
+
+.container img{
+    image-rendering: pixelated;
+}
+
+/* MARK: Juego */
+#game{
+    display: none;
+}
+
+#game > div{
+    z-index: 2;position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    gap: 40px;
+    align-items: last baseline;
+    justify-content: space-between;
+}
+
+#game .control{
+    margin: 20px;
+}
+
+.canvas_movil{
+    z-index: 1;
+    position: absolute;
+    bottom: 10px;
+    left: calc(50vw - 30vw);
+    width: 60vw;
+    max-width: 720px;
+    height: 80vh;
+    max-height: 480px;
+}
+
+.canvas_pc{
+    width: 720px;
+    margin-left: calc(50vw - 360px);
+    margin-top: 50px;
+    image-rendering: pixelated;
+}
+/* MARK: Control PAD */
+
+.control_pad {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 140px;
+    height: 140px;
+}
+
+.control_pad button {
+    background-color: var(--color-0);
+}
+
+.control_pad button:active{
+    background-color: var(--color-1);
+}
+
+.control_w{
+    grid-row: 1/2;
+    grid-column: 2/3;
+}
+.control_a{
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+.control_s{
+    grid-row: 3/4;
+    grid-column: 2/3;
+}
+.control_d{
+    grid-row: 2/3;
+    grid-column: 3/4;
+}
+
+.control_btns{
+    display: grid;
+    width: 120px;
+    height: 120px;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.control_space,.control_esc,.control_shift{
+margin: 5px;
+}
+
+.control_space{
+    background-color: var(--space);
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+.control_esc{
+    background-color: var(--escape);
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+
+.control_shift{
+    background-color: var(--shift);
+    grid-row: 1/2;
+    grid-column: 2/3;
+}
+
+@media (orientation: portrait){
+    .alerta{
+        display: flex;
+    }
+}

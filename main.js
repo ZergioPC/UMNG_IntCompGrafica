@@ -37,6 +37,8 @@ const npcList = npcs;
 let colision = false;
 let action = false;
 let alert = false;
+let canShift = true;
+let shiftKey = false;
 
 
 let direccion = 'sur';
@@ -250,6 +252,29 @@ const acciones = new Map([
             alertBox.display = false;
         }
     ],
+    ['ShiftLeft',function(){
+        if(canShift){
+            canShift = false;
+
+            if(shiftKey){
+                shiftKey = false;
+            }else{
+                shiftKey = true;
+            }
+
+            if(shiftKey == true){
+                player.img = player.runSp;
+                stopTime = 5;
+            }else{
+                
+                player.img = player.walkSp;
+                stopTime = 10;
+            }
+            setTimeout(()=>{
+                canShift = true;
+            },200);
+        }
+    }],
     ['KeyQ',function(){
         console.log(`x: ${pos_mapa.x}  y: ${pos_mapa.y}`);
         console.log(`x: ${coords.x}  y: ${coords.y}`);
@@ -266,27 +291,16 @@ setInterval(()=>{
 },delta_time);
 
 
-document.addEventListener('keydown',(e)=>{
-    //console.log(e.code);
-    if(movimientos.has(e.code)){
-        if(keyPress){
-            
+function eventListener(key){
+    if(movimientos.has(key)){
+        if(keyPress){    
             keyPress = false;
-            keyName = e.code;
+            keyName = key;
             
-            direcciones.get(keyName)();
-                
-            if(e.shiftKey == true){
-                player.img = player.runSp;
-                stopTime = 5;
-            }else{
-                player.img = player.walkSp;
-                stopTime = 10;
-            }
-            
+            direcciones.get(keyName)();      
             const move = setInterval(()=>{
                 if(movimientos.has(keyName)){
-                    if(e.shiftKey == true){
+                    if(shiftKey == true){
                         movimientos.get(keyName)(vel*2);
                     }else{
                         movimientos.get(keyName)(vel);
@@ -298,16 +312,31 @@ document.addEventListener('keydown',(e)=>{
             setTimeout(()=>{
                 clearInterval(move);
                 playerAnimation = false;
-                keyPress = true;
+                
             },(delta_time*stopTime))
+
+            setTimeout(()=>{
+                keyPress = true;
+            },(delta_time*stopTime)+10);
         }
-    }else if(acciones.has(e.code)){
-        //console.log(keyPress);
-        acciones.get(e.code)();
+    }else if(acciones.has(key)){
+        if(keyPress){
+            acciones.get(key)();
+        }
     }else{
         keyPress = true;
     }
+}
+
+document.addEventListener('keydown',(e)=>{
+    //console.log('xd');
+    eventListener(e.code);
 });
+
+document.addEventListener("touchstart",(e)=>{
+    //console.log(e.target.id);
+    eventListener(e.target.id);
+})
 
 
 //MARK: Render
