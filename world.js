@@ -2,8 +2,7 @@ class mapa {
     constructor(ctx,renderX,renderY,sizeX,sizeY,src){
         //canvas
         this.ctx = ctx;
-        this.img = new Image();
-        this.img.src = src;
+        this.img = src;
 
         //Posicion
         this.renderX = renderX;
@@ -33,10 +32,8 @@ class player{
         this.lienzo = lienzo;
         
         //Assets
-        this.walkSp = new Image();
-        this.walkSp.src = walk;
-        this.runSp = new Image();
-        this.runSp.src = run;
+        this.walkSp = walk;
+        this.runSp = run;
         
         this.img = this.walkSp;
 
@@ -89,10 +86,8 @@ class npc{
         
         //Canvas
         this.ctx = ctx;
-        this.img = new Image();
-        this.img.src = src;
-        this.avatar = new Image();
-        this.avatar.src = avatar;
+        this.img = src;
+        this.avatar = avatar;
 
         //posicion y animación
         this.pos = pos;
@@ -159,12 +154,9 @@ class dialogo{
         this.display = false;
 
         //Letrero
-        this.img = new Image();
-        this.img.src = src;
-        this.avatar = new Image();
-        this.avatar.src = avatar;
-        this.keyImg = new Image();
-        this.keyImg.src = keys;
+        this.img = src;
+        this.avatar = avatar;
+        this.keyImg = keys;
 
         //Texto
         this.texto = {};
@@ -217,10 +209,8 @@ class alert {
         this.display = false;
 
         //Letrero
-        this.img = new Image();
-        this.img.src = src;
-        this.keysImg = new Image();
-        this.keysImg.src = keys;
+        this.img = src;
+        this.keysImg = keys;
 
         //Texto
         this.texto = '';

@@ -13,11 +13,11 @@ const $canvas = document.getElementById('canvas');
 const ctx = $canvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
 
-const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,$img[10].src);
+const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,$img[10]);
 const casillas = {x:80,y:80};
-const player = new player_class(ctx,$img[15].src,$img[14].src,80,lienzo)
-const dialogoBox = new dialogo(ctx,$img[8].src,$img[7].src,$img[0].src);
-const alertBox = new alert_class(ctx,$img[1].src,$img[0].src);
+const player = new player_class(ctx,$img[15],$img[14],80,lienzo)
+const dialogoBox = new dialogo(ctx,$img[8],$img[7],$img[0]);
+const alertBox = new alert_class(ctx,$img[1],$img[0]);
 
 const vel = 8;
 let playerAnimation = false;

@@ -31,8 +31,7 @@ class stand {
         this.link = function(){
             location.href = `${semana}/index.html`;
         };
-        this.img = new Image();
-        this.img.src = src;
+        this.img = src;
 
         //Colision
         this.zona =[];
@@ -67,8 +66,7 @@ class objeto {
 
         //Asset
         this.ctx = ctx;
-        this.img = new Image();
-        this.img.src =  src;
+        this.img =  src;
 
         //escalado
         this.size = size;
