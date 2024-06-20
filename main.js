@@ -3,6 +3,8 @@ import {props,npcs} from './entities.js';
 
 /*  */
 const $img = document.querySelectorAll('#loadImg img');
+let padKey = '';
+let padIsTouch = false;
 /*  */
 
 const $canvas = document.getElementById('canvas');
@@ -337,10 +339,22 @@ document.addEventListener('keydown',(e)=>{
     eventListener(e.code);
 });
 
+
+setInterval(()=>{
+    if(padIsTouch){
+        eventListener(padKey);
+    }
+},200);
+
 document.addEventListener("touchstart",(e)=>{
-    //console.log(e.target.id);
-    eventListener(e.target.id);
+    padKey =e.target.id;
+    padIsTouch = true;
 })
+
+document.addEventListener('touchend',()=>{
+    padIsTouch = false;
+});
+
 
 
 //MARK: Render
