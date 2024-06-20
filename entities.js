@@ -1,4 +1,4 @@
-import { edificio,stand,objeto } from "./colisiones.js";
+import { edificio,stand,objeto,fuente as fuente_class} from "./colisiones.js";
 import {npc} from './world.js'; 
 import {dialogos as txt} from './dialogos.js';
 
@@ -16,7 +16,9 @@ const lago_izq = new edificio(0,3,4,16);
 const lago_der = new edificio(47,50,4,16);
 
 //#region 1. NPCs
-const test = new npc(ctx,'/img/npcTemplate.png',80,[6,5],txt.test);
+const npc_juan = new npc(ctx,'/img/npc_juan.png',80,[33,5],txt.juan,'/img/avatar_juan.png');
+const npc_julian = new npc(ctx,'/img/npc_julian.png',80,[25,10],txt.julian,'/img/avatar_julian.png');
+const npc_sofia = new npc(ctx,'/img/npc_sofia.png',80,[31,16],txt.sofia,'/img/avatar_sofia.png');
 
 //#region 2. Stands
 const semana1 = new stand(ctx,33,13,'Semana_1','/img/stand_1.png');
@@ -75,6 +77,8 @@ const arbol_34 = new objeto(ctx,9,13,47,'/img/arbol.png');
 const arbol_35 = new objeto(ctx,10,13,47,'/img/arbol.png');
 const arbol_36 = new objeto(ctx,11,13,47,'/img/arbol.png');
 
+//#region 3. Decoración
+const fuente = new fuente_class(ctx,26,9,80,280,'/img/Fuente.png');
 
 //MARK: Exports
 const props = {
@@ -85,7 +89,6 @@ const props = {
         lago_top.zona,
         lago_izq.zona,
         lago_der.zona,
-        test.zona,
         arbol_1.zona,
         arbol_2.zona,
         arbol_3.zona,
@@ -132,7 +135,11 @@ const props = {
         semana6.zona,
         semana7.zona,
         semana8.zona,
-        semana9.zona
+        semana9.zona,
+        fuente.zona,
+        npc_juan.zona,
+        npc_julian.zona,
+        npc_sofia.zona,
     ],
     stands : [
         semana1,
@@ -184,11 +191,14 @@ const props = {
         arbol_36,
         arbol_37,
         arbol_38
-    ]
+    ],
+    fuente : fuente
 }
 
 const npcs = [
-    test
+    npc_juan,
+    npc_julian,
+    npc_sofia
 ];
 
 export {props,npcs};

@@ -83,7 +83,7 @@ class player{
 }
 
 class npc{
-    constructor(ctx,src,escala,pos,dialogo){
+    constructor(ctx,src,escala,pos,dialogo,avatar){
         //Datos
         this.dialogo = dialogo;
         
@@ -91,6 +91,8 @@ class npc{
         this.ctx = ctx;
         this.img = new Image();
         this.img.src = src;
+        this.avatar = new Image();
+        this.avatar.src = avatar;
 
         //posicion y animación
         this.pos = pos;

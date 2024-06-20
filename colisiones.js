@@ -101,4 +101,36 @@ class objeto {
     }
 }
 
-export {edificio,stand,objeto};
+class fuente extends objeto {
+    constructor(ctx,x,y,size,render,src){
+        super(ctx,x,y,size,src);
+        this.render = render;
+        this.zona = [];
+        this.zona = []
+        for(let i=0; i<4 ; i++){
+            for(let j=0; j<4 ; j++){
+                this.zona.push([j+this.origen[0],i+this.origen[1]]);
+            }
+        }
+    }
+
+    draw(xPos,yPos,frame){
+        /* 
+        //Hitbox
+        this.ctx.fillRect(
+            this.x - xPos,
+            this.y - yPos - 40,
+            80,80
+        ); 
+         */
+        this.ctx.drawImage(
+            this.img, //Imagen
+            this.size*frame, 0,  //Desfasado
+            this.size,this.size,      //Escalar
+            this.x - xPos + 20, this.y - yPos,    //Posición inicial
+            this.render,this.render      //Escala de la Imagen
+        );
+    }
+}
+
+export {edificio,stand,objeto,fuente};

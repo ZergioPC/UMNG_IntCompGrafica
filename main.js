@@ -48,8 +48,12 @@ const direccion_list = {
 }
 
 let frame_arbol = 0;
+let frame_fuente = 0;
 
 //#region 1. Ubicación y Dibujado
+props.fuente.x = ((props.fuente.origen[0]-1)*casillas.x);
+props.fuente.y = ((props.fuente.origen[1]-1)*casillas.y);
+
 for (let i = 0; i < arbolList.length; i++) {
     arbolList[i].x = ((arbolList[i].origen[0]-1)*casillas.x);
     arbolList[i].y = ((arbolList[i].origen[1]-1)*casillas.y);
@@ -126,6 +130,7 @@ function npcEvent(vectX,vectY){
                 action = true;
                 npcList[u].frame = direccion_list[direccion];
                 dialogoBox.texto = npcList[u].dialogo;
+                dialogoBox.avatar = npcList[u].avatar;
                 setTimeout(()=>{
                     dialogoBox.ready = true;
                 },100);
@@ -136,6 +141,12 @@ function npcEvent(vectX,vectY){
         if(action == true){
             break;
         }
+    }
+}
+
+function defaultDirectionNPC(){
+    for(let u=0; u < npcList.length; u++){
+        npcList[u].frame = 0;
     }
 }
 
@@ -223,6 +234,9 @@ const acciones = new Map([
                 dialogoBox.ready = false;
                 setTimeout(()=>{
                     action = dialogoBox.nextLine();
+                    if(!action){
+                        defaultDirectionNPC();
+                    }
                     dialogoBox.ready = true;
                 },100)
             }
@@ -320,6 +334,12 @@ setInterval(()=>{
     }else{
         frame_arbol++;
     }
+
+    if(frame_fuente == 9){
+        frame_fuente = 0;
+    }else{
+        frame_fuente++
+    }
 },120);
 
 
@@ -327,11 +347,15 @@ setInterval(()=>{
 setInterval(()=>{
     ctx.reset();
     ctx.imageSmoothingEnabled = false;
+
     mapa.draw(pos_mapa.x,pos_mapa.y);
     player.drawCtx(pos_player.x,pos_player.y);
+
     drawNPCs(pos_mapa.x,pos_mapa.y);
     drawArboles(pos_mapa.x,pos_mapa.y,frame_arbol);
+    props.fuente.draw(pos_mapa.x,pos_mapa.y,frame_fuente);
     drawStands(pos_mapa.x,pos_mapa.y);
+    
     dialogoBox.draw();
     alertBox.draw();
 },60);
