@@ -96,44 +96,39 @@ function drawNPCs(posX,posY){
 
 //#region 2. Colisiones
 function checkColision(vectX,vectY){
+    colision = false;
     for(let u=0; u < colisionList.length; u++){
-        for (let i = 0; i < colisionList[u].length; i++) {
-            if(vectY == colisionList[u][i][1] && vectX == colisionList[u][i][0]){ 
+        const zona = colisionList[u];
+        for (let i = 0; i < zona.length; i++) {
+            if(vectY === zona[i][1] && vectX === zona[i][0]){
                 colision = true;
-                break;
-            }else{
-                colision = false; 
+                return;
             }
-        }
-        if(colision == true){
-            break;
         }
     }
 }
 
 function checkEvent(vectX,vectY){
+    alert = false;
     for(let u=0; u < standList.length; u++){
         for (let i = 0; i < standList[u].evento.length; i++) {
-            if(vectY == standList[u].evento[i][1] && vectX == standList[u].evento[i][0]){ 
+            if(vectY === standList[u].evento[i][1] && vectX === standList[u].evento[i][0]){
                 alert = true;
                 alertBox.semana = standList[u].semana;
                 alertBox.enlace = standList[u].link;
                 alertBox.display = true;
-                break;
-            }else{
-                alert = false; 
+                return;
             }
         }
-        if(alert == true){
-            break;
-        }
     }
+    alertBox.display = false;
 }
 
 function npcEvent(vectX,vectY){
+    action = false;
     for(let u=0; u < npcList.length; u++){
         for (let i = 0; i < npcList[u].actZone.length; i++) {
-            if(vectY == npcList[u].actZone[i][1] && vectX == npcList[u].actZone[i][0]){ 
+            if(vectY === npcList[u].actZone[i][1] && vectX === npcList[u].actZone[i][0]){
                 action = true;
                 npcList[u].frame = direccion_list[facing];
                 dialogoBox.texto = npcList[u].dialogo;
@@ -142,13 +137,11 @@ function npcEvent(vectX,vectY){
                     dialogoBox.ready = true;
                 },100);
                 dialogoBox.display = true;
-                break;
+                return;
             }
         }
-        if(action == true){
-            break;
-        }
     }
+    dialogoBox.display = false;
 }
 
 function defaultDirectionNPC(){
