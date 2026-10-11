@@ -91,7 +91,8 @@ class npc{
 
         //posicion y animación
         this.pos = pos;
-        this.x,this.y;
+        this.x = 0;
+        this.y = 0;
         this.frame = 0;        
         this.size = 26;
         this.escala = escala;
@@ -215,7 +216,7 @@ class alert {
         //Texto
         this.texto = '';
         this.semana = '';
-        this.enlace;
+        this.enlace = () => {};
     }
 
     draw(){

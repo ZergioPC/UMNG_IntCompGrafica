@@ -143,11 +143,12 @@ button{
     z-index: 3;
     position: absolute;
     bottom: 10px;
-    left: calc(50vw - 30vw);
-    width: 60vw;
-    max-width: 720px;
-    height: 80vh;
-    max-height: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(90vw, 720px);
+    aspect-ratio: 3 / 2;
+    height: auto;
+    image-rendering: pixelated;
 }
 
 .canvas_pc{

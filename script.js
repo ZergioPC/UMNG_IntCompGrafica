@@ -16,6 +16,7 @@ function esDispositivoMovil() {
 }
 
 $btn_Inicio.addEventListener("click",()=>{
+    $btn_Inicio.blur();
     $sec_inicio.style.display = "none";
     if (esDispositivoMovil()) {
         $sec_tut_mov.style.display = 'flex';
@@ -25,11 +26,13 @@ $btn_Inicio.addEventListener("click",()=>{
 })
 
 $btn_Tutorial_cel.addEventListener('click',()=>{
+    $btn_Tutorial_cel.blur();
     $sec_tut_mov.style.display = 'none';
     $sec_game.style.display = 'block';
 });
 
 $btn_Tutorial_pc.addEventListener('click',()=>{
+    $btn_Tutorial_pc.blur();
     $sec_tut_pc.style.display = 'none';
     $sec_game.style.display = 'block';
 });

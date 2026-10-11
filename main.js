@@ -1,31 +1,25 @@
 import {mapa as mapa_class,player as player_class,dialogo,alert as alert_class} from './world.js'; 
 import {props,npcs} from './entities.js';
-
-/*  */
-const $img = document.querySelectorAll('#loadImg img');
-let padKey = '';
-let padIsTouch = false;
-/*  */
+import {imgs,imgsReady} from './assets.js';
 
 const $canvas = document.getElementById('canvas');
-    const lienzo ={
-        ancho:$canvas.width,
-        alto:$canvas.height
-    };
+const lienzo = {
+    ancho: $canvas.width,
+    alto: $canvas.height
+};
 const ctx = $canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
+ctx.imageSmoothingEnabled = false;
 
-const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,$img[10]);
+const mapa = new mapa_class(ctx,720/10,480/10,lienzo.ancho,lienzo.alto,imgs.mapa);
 const casillas = {x:80,y:80};
-const player = new player_class(ctx,$img[15],$img[14],80,lienzo)
-const dialogoBox = new dialogo(ctx,$img[8],$img[7],$img[0]);
-const alertBox = new alert_class(ctx,$img[1],$img[0]);
+const player = new player_class(ctx,imgs.player_walk,imgs.player_run,80,lienzo);
+const dialogoBox = new dialogo(ctx,imgs.dialogue_box,imgs.avatarTemplate,imgs.action_keys);
+const alertBox = new alert_class(ctx,imgs.alert_box,imgs.action_keys);
 
 const vel = 8;
-let playerAnimation = false;
+const corrida = 2;
 
-const delta_time = 50;
-let stopTime = 10;
+let playerAnimation = false;
 
 let pointer = [0,0];
 const coords = {x:0,y:0};
@@ -38,25 +32,30 @@ const standList = props.stands;
 const arbolList = props.arboles;
 const npcList = npcs;
 
-//MARK: Fisicas y Mecanicas
-
+//MARK: Estado
 let colision = false;
 let action = false;
 let alert = false;
-let canShift = true;
 let shiftKey = false;
+let facing = 'sur';
+let moveKey = null;
 
+let frame_arbol = 0;
+let frame_fuente = 0;
 
-let direccion = 'sur';
 const direccion_list = {
     norte: 0,
     sur: 3,
     oeste: 2,
     este: 1
-}
+};
 
-let frame_arbol = 0;
-let frame_fuente = 0;
+const vectorDireccion = {
+    norte: [0,-1],
+    sur: [0,1],
+    oeste: [-1,0],
+    este: [1,0]
+};
 
 //#region 1. Ubicación y Dibujado
 props.fuente.x = ((props.fuente.origen[0]-1)*casillas.x);
@@ -136,7 +135,7 @@ function npcEvent(vectX,vectY){
         for (let i = 0; i < npcList[u].actZone.length; i++) {
             if(vectY == npcList[u].actZone[i][1] && vectX == npcList[u].actZone[i][0]){ 
                 action = true;
-                npcList[u].frame = direccion_list[direccion];
+                npcList[u].frame = direccion_list[facing];
                 dialogoBox.texto = npcList[u].dialogo;
                 dialogoBox.avatar = npcList[u].avatar;
                 setTimeout(()=>{
@@ -158,10 +157,12 @@ function defaultDirectionNPC(){
     }
 }
 
-//MARK: Controles
-let keyPress = true;
-let keyName;
+function updatePointer(){
+    const v = vectorDireccion[facing];
+    pointer = [coords.x + v[0], coords.y + v[1]];
+}
 
+//MARK: Controles
 function moverse(posMapa,posPlayer,direction,limite,desfase){
     if(limite || desfase){
         posPlayer = posPlayer + direction;
@@ -175,55 +176,51 @@ function moverse(posMapa,posPlayer,direction,limite,desfase){
 const direcciones = new Map([
     ['KeyW', function(){
         player.animation = 3;
-        pointer = [coords.x,coords.y-1];
+        facing = 'norte';
         checkColision(coords.x,coords.y-1);
-        direccion = 'norte';
     }],
     ['KeyA', function(){
-        pointer = [coords.x-1,coords.y];
         player.animation = 1;
+        facing = 'oeste';
         checkColision(coords.x-1,coords.y);
-        direccion = 'oeste';
     }],
     ['KeyS', function(){
-        pointer = [coords.x,coords.y+1];
         player.animation = 0;
+        facing = 'sur';
         checkColision(coords.x,coords.y+1);
-        direccion = 'sur';
     }],
     ['KeyD', function(){
-        pointer = [coords.x+1,coords.y]
         player.animation = 2;
+        facing = 'este';
         checkColision(coords.x+1,coords.y);
-        direccion = 'este';
     }]
 ]);
 
 //#region 2. Activar función de moverse
 const movimientos = new Map([
     ['KeyW', function(dir){
-        if(!colision && !action){
+        if(!colision && !action && !alert){
             const posiciones = moverse(pos_mapa.y,pos_player.y,(-dir),(pos_global.y-dir < 240),(pos_player.y > 0));
             pos_mapa.y = posiciones.mapa;
             pos_player.y = posiciones.player;
         }
     }],
     ['KeyA', function(dir){
-        if(!colision && !action){
+        if(!colision && !action && !alert){
             const posiciones = moverse(pos_mapa.x,pos_player.x,(-dir),(pos_global.x-dir < 320),(pos_player.x > 0));
             pos_mapa.x = posiciones.mapa;
             pos_player.x = posiciones.player;
         }
     }],
     ['KeyS', function(dir){
-        if(!colision && !action){
+        if(!colision && !action && !alert){
             const posiciones = moverse(pos_mapa.y,pos_player.y,(+dir),(pos_global.y+dir > 1760),(pos_player.y < 0));
             pos_mapa.y = posiciones.mapa;
             pos_player.y = posiciones.player;
         }
     }],
     ['KeyD', function(dir){
-        if(!colision && !action){
+        if(!colision && !action && !alert){
             const posiciones = moverse(pos_mapa.x,pos_player.x,(+dir),(pos_global.x+dir > 3600),(pos_player.x < 0));
             pos_mapa.x = posiciones.mapa;
             pos_player.x = posiciones.player;
@@ -234,9 +231,12 @@ const movimientos = new Map([
 const acciones = new Map([
     ['Space',function(){
         if(!action && !alert){
+            updatePointer();
             dialogoBox.ready = false;
-            checkEvent(pointer[0],pointer[1])
-            npcEvent(pointer[0],pointer[1]);
+            checkEvent(pointer[0],pointer[1]);
+            if(!alert){
+                npcEvent(pointer[0],pointer[1]);
+            }
         }else{
             if(dialogoBox.display){
                 dialogoBox.ready = false;
@@ -259,26 +259,11 @@ const acciones = new Map([
         }
     ],
     ['ShiftLeft',function(){
-        if(canShift){
-            canShift = false;
-
-            if(shiftKey){
-                shiftKey = false;
-            }else{
-                shiftKey = true;
-            }
-
-            if(shiftKey == true){
-                player.img = player.runSp;
-                stopTime = 5;
-            }else{
-                
-                player.img = player.walkSp;
-                stopTime = 10;
-            }
-            setTimeout(()=>{
-                canShift = true;
-            },200);
+        shiftKey = !shiftKey;
+        if(shiftKey){
+            player.img = player.runSp;
+        }else{
+            player.img = player.walkSp;
         }
     }],
     ['KeyQ',function(){
@@ -287,111 +272,100 @@ const acciones = new Map([
     }]
 ]);
 
-//#region 3. detection de señales
+//#region 3. Detection de señales
 
-setInterval(()=>{
+const MOVEMENT_KEYS = new Set(['KeyW','KeyA','KeyS','KeyD']);
+const GAME_KEYS = new Set([...MOVEMENT_KEYS, ...acciones.keys()]);
+const activeActions = new Set();
+
+function tick(){
     coords.x = Math.floor((pos_mapa.x + pos_player.x + 320)/casillas.x)+1;
     coords.y = Math.floor((pos_mapa.y + pos_player.y + 240)/casillas.y)+1;
     pos_global.x = pos_mapa.x + pos_player.x + 320;
     pos_global.y = pos_mapa.y + pos_player.y + 240;
-},delta_time);
 
+    if(moveKey && !action && !alert){
+        direcciones.get(moveKey)();
+        const paso = shiftKey ? vel*corrida : vel;
+        movimientos.get(moveKey)(paso);
+        playerAnimation = !colision;
+    }else{
+        playerAnimation = false;
+    }
+}
 
-function eventListener(key){
-    if(movimientos.has(key)){
-        if(keyPress){    
-            keyPress = false;
-            keyName = key;
-            
-            direcciones.get(keyName)();      
-            const move = setInterval(()=>{
-                if(movimientos.has(keyName)){
-                    if(shiftKey == true){
-                        movimientos.get(keyName)(vel*2);
-                    }else{
-                        movimientos.get(keyName)(vel);
-                    }
-                    playerAnimation = true;
-                }
-            },delta_time);
-            
-            setTimeout(()=>{
-                clearInterval(move);
-                playerAnimation = false;
-                
-            },(delta_time*stopTime))
-
-            setTimeout(()=>{
-                keyPress = true;
-            },(delta_time*stopTime)+10);
-        }
+function keyDown(key){
+    if(MOVEMENT_KEYS.has(key)){
+        moveKey = key;
+        direcciones.get(key)();
     }else if(acciones.has(key)){
-        if(keyPress){
+        if(!activeActions.has(key)){
+            activeActions.add(key);
             acciones.get(key)();
         }
-    }else{
-        keyPress = true;
+    }
+}
+
+function keyUp(key){
+    if(MOVEMENT_KEYS.has(key)){
+        if(moveKey === key){
+            moveKey = null;
+        }
+    }else if(acciones.has(key)){
+        activeActions.delete(key);
     }
 }
 
 document.addEventListener('keydown',(e)=>{
-    //console.log('xd');
-    eventListener(e.code);
-});
-
-
-setInterval(()=>{
-    if(padIsTouch){
-        eventListener(padKey);
+    if(GAME_KEYS.has(e.code)){
+        e.preventDefault();
     }
-},200);
-
-document.addEventListener("touchstart",(e)=>{
-    padKey =e.target.id;
-    padIsTouch = true;
-})
-
-document.addEventListener('touchend',()=>{
-    padIsTouch = false;
+    keyDown(e.code);
 });
 
+document.addEventListener('keyup',(e)=>{
+    if(GAME_KEYS.has(e.code)){
+        e.preventDefault();
+    }
+    keyUp(e.code);
+});
 
+document.querySelectorAll('#controles button').forEach((btn)=>{
+    const key = btn.id;
+    const start = (e)=>{ e.preventDefault(); keyDown(key); };
+    const end = (e)=>{ e.preventDefault(); keyUp(key); };
+    btn.addEventListener('touchstart',start,{passive:false});
+    btn.addEventListener('touchend',end,{passive:false});
+    btn.addEventListener('touchcancel',end,{passive:false});
+    btn.addEventListener('mousedown',start);
+    btn.addEventListener('mouseup',end);
+    btn.addEventListener('mouseleave',end);
+});
 
 //MARK: Render
+let animAcc = 0;
+const ANIM_DT = 120;
 
-setInterval(()=>{
-    if(mapa.frame == 5){
-        mapa.frame = 0;
-    }else{
-        mapa.frame++;
+function updateAnim(dt){
+    animAcc += dt;
+    while(animAcc >= ANIM_DT){
+        animAcc -= ANIM_DT;
+
+        mapa.frame = (mapa.frame + 1) % 6;
+        frame_arbol = (frame_arbol + 1) % 18;
+        frame_fuente = (frame_fuente + 1) % 10;
+
+        if(playerAnimation){
+            player.frame = (player.frame + 1) % 4;
+        }
     }
 
-    if(playerAnimation){
-        if(player.frame == 3){
-            player.frame = 0;
-        }else{
-            player.frame++;
-        }
-    }else{
+    if(!playerAnimation){
         player.frame = 0;
     }
+}
 
-    if(frame_arbol == 17){
-        frame_arbol = 0;
-    }else{
-        frame_arbol++;
-    }
-
-    if(frame_fuente == 9){
-        frame_fuente = 0;
-    }else{
-        frame_fuente++
-    }
-},120);
-
-
-//#region 1. canvas
-setInterval(()=>{
+function render(){
     ctx.reset();
     ctx.imageSmoothingEnabled = false;
 
@@ -402,17 +376,37 @@ setInterval(()=>{
     drawArboles(pos_mapa.x,pos_mapa.y,frame_arbol);
     props.fuente.draw(pos_mapa.x,pos_mapa.y,frame_fuente);
     drawStands(pos_mapa.x,pos_mapa.y);
-    
+
     dialogoBox.draw();
     alertBox.draw();
-},60);
+}
 
+//MARK: Game loop (rAF + fixed timestep)
+const FIXED_DT = 50;
+let lastTime = performance.now();
+let acumulador = 0;
 
-/* 
-//MARK: Print datos
-setInterval(()=>{
-    console.clear();
-    console.log(`x: ${coords.x}  y: ${coords.y}`);
-    //console.log(pos_global);
-},500);
-*/
+function loop(now){
+    let dt = now - lastTime;
+    lastTime = now;
+    if(dt > 250){
+        dt = 250;
+    }
+
+    acumulador += dt;
+    let pasos = 0;
+    while(acumulador >= FIXED_DT && pasos < 5){
+        tick();
+        acumulador -= FIXED_DT;
+        pasos++;
+    }
+
+    updateAnim(dt);
+    render();
+
+    requestAnimationFrame(loop);
+}
+
+imgsReady().then(()=>{
+    requestAnimationFrame(loop);
+});

@@ -103,7 +103,6 @@ class fuente extends objeto {
     constructor(ctx,x,y,size,render,src){
         super(ctx,x,y,size,src);
         this.render = render;
-        this.zona = [];
         this.zona = []
         for(let i=0; i<4 ; i++){
             for(let j=0; j<4 ; j++){
