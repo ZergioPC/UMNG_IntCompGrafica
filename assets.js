@@ -9,7 +9,10 @@ document.querySelectorAll('#loadImg img').forEach((el) => {
 function imgsReady() {
     const pendientes = [];
     document.querySelectorAll('#loadImg img').forEach((img) => {
-        if (img.complete && img.naturalWidth > 0) return;
+        if (img.complete && img.naturalWidth > 0) {
+            pendientes.push(img.decode ? img.decode().catch(() => {}) : Promise.resolve());
+            return;
+        }
         pendientes.push(new Promise((resolve) => {
             img.addEventListener('load', resolve, { once: true });
             img.addEventListener('error', resolve, { once: true });
