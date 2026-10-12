@@ -1,14 +1,27 @@
 const dialogos = {
+    test:{
+        name:'test',
+        talk:[
+            [
+                "xd",
+                "prueba de longitud de caja prueba de"
+            ],
+            [
+                "xd2",
+                "prueba de longitud de caja prueba 2"
+            ],
+        ]
+    },
     juan:{
         name:'Juan',
         talk:[
             [
-                "Aprendí bastante sobre cómo se",
-                "generan imágenes por computadora."
+                "En esta clase no aprendimos nada en",
+                "todo el semestre"
             ],
             [
-                "Lo que más me gustó fue programar",
-                "el mapa interactivo sobre canvas."
+                "Almenos alguien utilizó bien el",
+                "tiempo que malgastabamos ahí"
             ],
         ]
     },
@@ -16,16 +29,20 @@ const dialogos = {
         name:'Julián',
         talk:[
             [
-                "Las transformaciones geométricas",
-                "fueron de las clases más útiles."
+                "Hojalá haber matriculado en el",
+                "otro grupo"
             ],
             [
-                "Con eso pude animar personajes",
-                "y objetos sin mayor problema."
+                "Allí incluso estaban programando",
+                "juegos con Unity"
             ],
             [
-                "Recomiendo practicar los ejercicios",
-                "para dominar las matrices."
+                "...",
+                ""
+            ],
+            [
+                "Joto el que me lea",
+                ""
             ],
         ]
     },
@@ -33,12 +50,8 @@ const dialogos = {
         name:'Sofía',
         talk:[
             [
-                "Trabajar con curvas y polígonos",
-                "fue mi parte favorita del curso."
-            ],
-            [
-                "Ojalá sigamos aplicando estos temas",
-                "en proyectos más grandes."
+                "Pensar en todo lo que pudimos",
+                "haber aprendido :("
             ],
         ]
     },
