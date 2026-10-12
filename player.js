@@ -1,4 +1,4 @@
-import { TILE, PLAYER_SPAWN, isSolid } from './level.js';
+import { TILE, PLAYER_SPAWN, isSolid, COLLIDERS } from './level.js';
 import { Sprite } from './sprite.js';
 import { isDown } from './input.js';
 
@@ -29,9 +29,11 @@ export class Player {
     get tileX() { return Math.floor(this.px / TILE); }
     get tileY() { return Math.floor(this.py / TILE); }
     get baseY() { return this.py + 40; }
-    get frontTile() {
+    // Punto justo delante de la hitbox, en px de mundo (para interactuar).
+    get frontProbe() {
         const f = FACING[this.dir];
-        return { x: this.tileX + f.x, y: this.tileY + f.y };
+        const reach = HALF + 8;
+        return { x: this.px + f.x * reach, y: this.py + f.y * reach };
     }
 
     setRunning(on) {
@@ -48,14 +50,26 @@ export class Player {
     }
 
     collides(cx, cy) {
-        const x1 = Math.floor((cx - HALF) / TILE);
-        const x2 = Math.floor((cx + HALF) / TILE);
-        const y1 = Math.floor((cy - HALF) / TILE);
-        const y2 = Math.floor((cy + HALF) / TILE);
-        for (let ty = y1; ty <= y2; ty++) {
-            for (let tx = x1; tx <= x2; tx++) {
+        const x1 = cx - HALF;
+        const x2 = cx + HALF;
+        const y1 = cy - HALF;
+        const y2 = cy + HALF;
+
+        // Terreno (tiles).
+        const tx1 = Math.floor(x1 / TILE);
+        const tx2 = Math.floor(x2 / TILE);
+        const ty1 = Math.floor(y1 / TILE);
+        const ty2 = Math.floor(y2 / TILE);
+        for (let ty = ty1; ty <= ty2; ty++) {
+            for (let tx = tx1; tx <= tx2; tx++) {
                 if (isSolid(tx, ty)) return true;
             }
+        }
+
+        // Entidades (AABB recortadas por abajo).
+        for (let i = 0; i < COLLIDERS.length; i++) {
+            const c = COLLIDERS[i];
+            if (x1 < c.x + c.w && x2 > c.x && y1 < c.y + c.h && y2 > c.y) return true;
         }
         return false;
     }

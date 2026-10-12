@@ -37,10 +37,18 @@ let state = STATE.PLAY;
 const OPPOSITE = { norte: 'sur', sur: 'norte', este: 'oeste', oeste: 'este' };
 
 // MARK: Interaccion
-function tryInteract() {
-    const front = player.frontTile;
+function pointInRect(p, r) {
+    return p.x >= r.x && p.x < r.x + r.w && p.y >= r.y && p.y < r.y + r.h;
+}
 
-    const npc = npcs.find((n) => n.tileX === front.x && n.tileY === front.y);
+function standActZone(s) {
+    return { x: (s.tile[0] + 1) * TILE, y: (s.tile[1] + 1) * TILE, w: 2 * TILE, h: TILE };
+}
+
+function tryInteract() {
+    const probe = player.frontProbe;
+
+    const npc = npcs.find((n) => pointInRect(probe, n.actZone));
     if (npc) {
         npc.face(OPPOSITE[player.dir]);
         dialogue.open(npc);
@@ -48,7 +56,7 @@ function tryInteract() {
         return;
     }
 
-    const stand = STANDS.find((s) => s.events.some((e) => e[0] === front.x && e[1] === front.y));
+    const stand = STANDS.find((s) => pointInRect(probe, standActZone(s)));
     if (stand) {
         alert.open(stand);
         state = STATE.PROMPT;

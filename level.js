@@ -1,5 +1,9 @@
 // Datos del nivel. Mundo 50x25 tiles de 80px -> 4000x2000px.
-// Las celdas solidas viven en un Set "x,y" para consultas O(1).
+// El terreno (fronteras/lago) vive en un Set "x,y" para consultas O(1).
+// Las entidades (arboles, stands, fuente, NPCs) usan colliders AABB en px,
+// con el borde superior a la altura del tile y el inferior recortado hasta
+// los "pies" del sprite: asi se puede quedar detras desde arriba pero el
+// jugador se acerca mas desde abajo.
 
 export const TILE = 80;
 export const COLS = 50;
@@ -29,6 +33,17 @@ export function isSolid(x, y) {
     return solid.has(key(x, y));
 }
 
+// Colliders de entidades (AABB en px de mundo).
+export const COLLIDERS = [];
+function addCollider(x, y, w, h) {
+    COLLIDERS.push({ x, y, w, h });
+}
+
+// Altura del collider segun los pies del sprite (borde superior = tile).
+const FOOT_1_TILE = 40;    // arboles y NPCs
+const FOOT_STAND = 126;   // stand 68x44 -> 272x176, top en y-50
+const FOOT_FOUNTAIN = 280; // fuente 80 -> 280, top en y
+
 // Fronteras y lago (coordenadas 0-based, inclusivas).
 fillRect(0, 0, 49, 2);    // lago superior
 fillRect(0, 3, 2, 15);    // lago izquierdo
@@ -37,7 +52,7 @@ fillRect(0, 15, 0, 24);   // frontera izquierda
 fillRect(49, 15, 49, 24); // frontera derecha
 fillRect(0, 24, 49, 24);  // frontera inferior
 
-// Arboles (1 celda solida cada uno).
+// Arboles.
 export const TREES = [
     [2, 20], [1, 18], [0, 20], [2, 16], [3, 18], [4, 16], [5, 18],
     [6, 16], [7, 18], [8, 16], [9, 18], [10, 16], [11, 18], [12, 16], [13, 18],
@@ -46,7 +61,7 @@ export const TREES = [
     [7, 7], [8, 7], [9, 7], [10, 7],
     [7, 12], [8, 12], [9, 12], [10, 12],
 ];
-TREES.forEach(([x, y]) => fillRect(x, y, x, y));
+TREES.forEach(([x, y]) => addCollider(x * TILE, y * TILE, TILE, FOOT_1_TILE));
 
 // Stands de cada semana (4x2 celdas) con sus celdas de interaccion al frente.
 export const STANDS = [
@@ -63,19 +78,19 @@ export const STANDS = [
 STANDS.forEach((s) => {
     const [x, y] = s.tile;
     s.events = [[x + 1, y + 1], [x + 2, y + 1]];
-    fillRect(x, y, x + 3, y + 1);
+    addCollider(x * TILE, y * TILE, 4 * TILE, FOOT_STAND);
 });
 
-// NPCs (1 celda solida cada uno).
+// NPCs.
 export const NPCS = [
     { id: 'juan', img: 'npc_juan', avatar: 'avatar_juan', dialog: 'juan', faction: 'estudiante', tile: [32, 4] },
     { id: 'julian', img: 'npc_julian', avatar: 'avatar_julian', dialog: 'julian', faction: 'estudiante', tile: [24, 9] },
     { id: 'sofia', img: 'npc_sofia', avatar: 'avatar_sofia', dialog: 'sofia', faction: 'estudiante', tile: [30, 15] },
 ];
-NPCS.forEach((n) => fillRect(n.tile[0], n.tile[1], n.tile[0], n.tile[1]));
+NPCS.forEach((n) => addCollider(n.tile[0] * TILE, n.tile[1] * TILE, TILE, FOOT_1_TILE));
 
-// Fuente (4x4 celdas).
+// Fuente.
 export const FOUNTAIN = { tile: [25, 8] };
-fillRect(25, 8, 28, 11);
+addCollider(FOUNTAIN.tile[0] * TILE, FOUNTAIN.tile[1] * TILE, 4 * TILE, FOOT_FOUNTAIN);
 
 export const PLAYER_SPAWN = { x: 27 * TILE + TILE / 2, y: 16 * TILE + TILE / 2 };

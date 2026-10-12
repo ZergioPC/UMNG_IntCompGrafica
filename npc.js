@@ -27,6 +27,8 @@ export class NPC {
     }
 
     get baseY() { return this.py + 40; }
+    // Zona de interaccion: el tile completo del NPC.
+    get actZone() { return { x: this.tileX * TILE, y: this.tileY * TILE, w: TILE, h: TILE }; }
 
     draw(ctx, camX, camY) {
         const sx = this.px - camX;
