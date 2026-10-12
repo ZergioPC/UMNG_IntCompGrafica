@@ -102,6 +102,7 @@ button:hover{
 }
 
 #menu div{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,8 +115,17 @@ button:hover{
 }
 
 #menu h2{
+    position: absolute;
+    top: 20px;
+    z-index: 2;
     font-size: 2em;
     color: var(--color-4);
+}
+
+#menu div > button{
+    position: absolute;
+    bottom: 20px;
+    z-index: 2;
 }
 
 #menu img{

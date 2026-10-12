@@ -35,7 +35,7 @@ const window = {
     w: 300,
     h: 300
 }
-const window_rain = new animado($ctx,'./Img/fondo/window_bg.png',window.x,window.y,window.w,window.h,2,0,50,50);
+const window_rain = new animado($ctx,'./Img/fondo/Window_bg.png',window.x,window.y,window.w,window.h,2,0,50,50);
 const window_marco = new statico($ctx,'./Img/fondo/window_marco.png',window.x,window.y,window.w,window.h);
 const window_flash = new statico($ctx,'./Img/fondo/window_flash.png',window.x,window.y,window.w,window.h);
 window_flash.delta = 9999;
